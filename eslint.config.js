@@ -3,6 +3,7 @@ import globals from 'globals'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import testingLibrary from 'eslint-plugin-testing-library'
 
 export default [
   { ignores: ['dist'] },
@@ -22,6 +23,7 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'testing-library': testingLibrary,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -32,8 +34,23 @@ export default [
       'react/prop-types': 'off',
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        { allowConstantExport: true }, 
       ],
+      "prefer-destructuring": [
+        "error",
+        {
+          array: true,
+          object: true,
+        },
+        {
+          enforceForRenamedProperties: false,
+        },
+      ],
+      "no-console": "warn",
+      'testing-library/await-async-queries': 'error',
+		  'testing-library/no-await-sync-queries': 'error',
+		  'testing-library/no-debugging-utils': 'warn',
+		  'testing-library/no-dom-import': 'off',
     },
   },
 ]
