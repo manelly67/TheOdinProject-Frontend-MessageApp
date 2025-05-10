@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { urlAddresses } from "./assets/urlAddresses";
 import "./styles/App.css";
+import ToggleTheme from "./components/ToggleTheme";
 
 function App() {
   const body = document.querySelector("body");
@@ -16,6 +17,7 @@ function App() {
     <>
       <main>
         <section className="phonebox">
+          <ToggleTheme theme="light"/>
           <div>
             <p>testing initial page</p>
           </div>

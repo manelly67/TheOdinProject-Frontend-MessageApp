@@ -1,19 +1,27 @@
 /* define light dark colors*/
 .light {
-    --color-bg-first: #bdeafa;
+    --color-bg-first: #f1fafe;
     --color-base-text: #0a3447;
+    --color-base-text-2: #10506A;
     --color-bg-button: #0990c0;
     --color-border-button: #16b1e1;
     --color-text-a-link: #28c1ef;
-    
+    --color-bg-box:#e1f4fd;
+    --color-border-box:#e1f4fd;
+    --color-text-box:#0c6180;
+
   }
   
 .dark {
     --color-bg-first: #10506A;
     --color-base-text: #f1fafe;
-    --color-bg-button: #82daf7;
+    --color-base-text-2: #f1fafe;
+    --color-bg-button: #16b1e1;
     --color-border-button: #bdeafa;
     --color-text-a-link: #28c1ef;
+    --color-bg-box:#0c6180;
+    --color-border-box:#0c6180;
+    --color-text-box:#e1f4fd;
   }
   
   /* http://meyerweb.com/eric/tools/css/reset/ 
