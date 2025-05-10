@@ -1,21 +1,29 @@
 import { useState, useEffect } from "react";
 import { urlAddresses } from "./assets/urlAddresses";
-import "./App.css";
+import "./styles/App.css";
 
 function App() {
- 
+  const body = document.querySelector("body");
+  if (body) {
+    document.body.className = "light";
+  }
+
   const [data, setData] = useState(null);
-  const [user,setUser] = useState(null);
-  const [token,setToken] = useState(null);
-  
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   return (
     <>
-     
-        <div>
-          <p>testing initial page</p>
-        </div>
-     
+      <main>
+        <section className="phonebox">
+          <div>
+            <p>testing initial page</p>
+          </div>
+          <div>
+            <button>ON</button>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
