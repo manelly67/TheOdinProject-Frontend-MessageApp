@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { urlAddresses } from "./assets/urlAddresses";
 import "./styles/App.css";
+import Icon from "@mdi/react";
+import { mdiCellphoneBasic } from "@mdi/js";
 import ToggleTheme from "./components/ToggleTheme";
 
 function App() {
@@ -9,21 +12,30 @@ function App() {
     document.body.className = "light";
   }
 
-  const [data, setData] = useState(null);
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
   const [token, setToken] = useState(null);
 
   return (
     <>
       <main>
         <section className="phonebox">
-          <ToggleTheme theme="light"/>
-          <div>
-            <p>testing initial page</p>
-          </div>
-          <div>
-            <button>ON</button>
-          </div>
+          <ToggleTheme theme="light" />
+
+          <button
+            className="phonebutton"
+            onClick={() => {
+              navigate("/main_app", {
+                replace: true,
+                state: { token: token },
+              });
+            }}
+          >
+            <div>
+              <p>ON/OFF</p>
+              <Icon path={mdiCellphoneBasic} size={15} />
+            </div>
+          </button>
         </section>
       </main>
     </>
