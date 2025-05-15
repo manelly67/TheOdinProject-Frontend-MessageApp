@@ -17,8 +17,9 @@ const ToggleTheme = (props) => {
 
   return (
     <button
+      style={{gridColumn: '2/3'}}
       className="themeButton"
-      onClick={(event) => {
+      onClick={() => {
         toggleTheme();
       }}
     >

@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlAddresses } from "./assets/urlAddresses";
 import "./styles/App.css";
-import Icon from "@mdi/react";
-import { mdiCellphoneBasic } from "@mdi/js";
 import ToggleTheme from "./components/ToggleTheme";
 
 function App() {
@@ -23,6 +21,7 @@ function App() {
           <ToggleTheme theme="light" />
 
           <button
+            style={{ display: "flex", justifyContent: "center" }}
             className="phonebutton"
             onClick={() => {
               navigate("/main_app", {
@@ -31,9 +30,18 @@ function App() {
               });
             }}
           >
-            <div>
-              <p>ON/OFF</p>
-              <Icon path={mdiCellphoneBasic} size={15} />
+            <div
+              style={{
+                border: "1px solid black",
+                borderRadius: "60px",
+                width: "100px",
+                height: "100px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p style={{ fontSize: "3rem" }}>ON</p>
             </div>
           </button>
         </section>

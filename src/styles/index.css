@@ -95,7 +95,8 @@
     text-decoration: inherit;
   }
   a:hover {
-    color: #ccdf79;
+    color: var(--color-base-text-2);
+    line-height: 1.2;
   }
   
   body {
