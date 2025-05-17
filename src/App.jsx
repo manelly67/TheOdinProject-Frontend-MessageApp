@@ -4,15 +4,19 @@ import { urlAddresses } from "./assets/urlAddresses";
 import "./styles/App.css";
 import ToggleTheme from "./components/ToggleTheme";
 
+const body = document.querySelector("body");
+const titleDiv = document.querySelector("title");
+
 function App() {
-  const body = document.querySelector("body");
+  
   if (body) {
     document.body.className = "light";
   }
+  if (titleDiv) {
+    titleDiv.textContent = 'MESSAGING APP';
+  }
 
   const navigate = useNavigate();
-
-  const [token, setToken] = useState(null);
 
   return (
     <>
@@ -24,10 +28,7 @@ function App() {
             style={{ display: "flex", justifyContent: "center" }}
             className="phonebutton"
             onClick={() => {
-              navigate("/main_app", {
-                replace: true,
-                state: { token: token },
-              });
+              navigate("/main_app", { replace: true });
             }}
           >
             <div

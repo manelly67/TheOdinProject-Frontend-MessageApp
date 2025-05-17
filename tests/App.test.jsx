@@ -7,7 +7,7 @@ import App from "../src/App.jsx";
 import ErrorPage from "../src/components/Error_page.jsx";
 
 describe("App Component", () => {
-  it("display the page", () => {
+  it("display the initial page", () => {
     render(
       <MemoryRouter initialEntries={["/"]}>
         <App />

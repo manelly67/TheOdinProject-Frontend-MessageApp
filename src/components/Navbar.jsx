@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
-  const [classes, setClasses] = useState(null);
+  const [classes, setClasses] = useState("lateral animate-in");
 
   function closeNav() {
     setShow(false);
@@ -31,7 +31,7 @@ const Navbar = (props) => {
         ) : null
       ) : (
         <nav>
-          <Link>Sign Up</Link>
+          <Link to="/sign_up">Sign Up</Link>
           <Link>Login</Link>
           <Link>Guest Mode</Link>
           <Link>Logout</Link>
@@ -54,7 +54,7 @@ function LateralNavbar(props) {
   return (
     <>
       <nav className={`${props.classes}`}>
-        <Link>Sign Up</Link>
+        <Link to="sign_up">Sign Up</Link>
         <Link>Login</Link>
         <Link>Guest Mode</Link>
         <Link>Logout</Link>

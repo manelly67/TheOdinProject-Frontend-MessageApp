@@ -1,32 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
 import Navbar from "./Navbar";
 
-const MainView = () => { 
+const MainView = () => {
+  const [screenWidth, setScreenWidth] = useState(0);
+  
+  const token =
+  localStorage.getItem("token") !== undefined
+    ? JSON.parse(localStorage.getItem("token"))
+    : null;
 
-const [screenWidth, setScreenWidth] = useState(0);
-console.log(screenWidth);
-// SI ES MENOR DE 360 MUESTRA UN SOLO BOTON QUE LLEVA AL NAVbar DROPDOWN MENU DE TRES BOTONES
-// SI ES MAYOR MUESTRA DIRECTAMENTE LOS TRES BOTONES
+  
+/* 
+  const initScreen = useCallback(async () => {
+    
+  },[]); */
 
-useEffect(() => {
+  useEffect(() => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
-    return (
-        <>
-        <main>
-          <section className="phonebox">
-            <div>
+ /*  useEffect(() => {
+    if (token === null) {
+      initScreen();
+    }
+  }, [token, initScreen]);
+ */
+  return (
+    <>
+      <main>
+        <section className="phonebox">
+          <div>
             <ToggleTheme theme="light" />
             <Navbar screenWidth={screenWidth} />
-            </div>
-            
-  
-          </section>
-        </main>
-      </>
-      );
+          </div>
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default MainView;
