@@ -13,6 +13,6 @@ describe("Navbar large screen", () => {
     );
 
     expect(screen.queryByRole("navigation")).toBeInTheDocument();
-    expect(screen.getAllByRole("link").length).toBe(4);
+    expect(screen.getAllByRole("link").length).toBe(3);
   });
 });

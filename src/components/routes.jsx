@@ -3,6 +3,7 @@ import ErrorPage from "./Error_page";
 import MainView from "./MainView";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import Logout from "./Logout";
 
 const routes = [
   {
@@ -18,6 +19,10 @@ const routes = [
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "logout",
+    element: <Logout />,
   },
   
   {

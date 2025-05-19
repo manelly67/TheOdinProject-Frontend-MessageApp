@@ -39,7 +39,6 @@ const Login = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "*/*",
         Connection: "keep-alive",
       },
       body: JSON.stringify(logindata),
@@ -138,7 +137,7 @@ const Login = () => {
               </>
             ) : (
               <Navigate
-                to="/main_view"
+                to="/main_app"
                 replace={true}
                 state={{ user: activeUser }}
               />

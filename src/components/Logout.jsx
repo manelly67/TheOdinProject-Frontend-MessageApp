@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ToggleTheme from "./ToggleTheme";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Form.module.css";
 
 const titleDiv = document.querySelector("title");
 const url = urlAddresses.logout;
+let didInit = false;
 
 const Logout = () => {
   if (titleDiv) {
@@ -18,7 +19,7 @@ const Logout = () => {
       ? JSON.parse(localStorage.getItem("token"))
       : null;
 
-  useEffect(() => {
+  /* useEffect(() => {
     switch (responseData === "{}") {
       case true:
         getData(url);
@@ -26,12 +27,40 @@ const Logout = () => {
       case false:
         break;
     }
-  });
+  }); */
 
-  async function getData(arg) {
+  const logoutSession = useCallback(async() => {
     try {
-      const response = await fetch(arg, {
+      const response = await fetch(url, {
         method: "GET",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+      const temp = await response.json();
+      setResponseData(temp);
+      localStorage.setItem("token", JSON.stringify(null));
+      return setResponseData;
+    } catch (error) {
+      alert("Something was wrong. try again later");
+      console.log(error);
+    }
+  },[token]);
+
+  useEffect(() => {
+    if (!didInit) {
+      didInit = true;
+      logoutSession();
+    }
+  }, [logoutSession]);
+
+  /* async function logoutSession() {
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
@@ -46,7 +75,7 @@ const Logout = () => {
       console.log(error);
     }
   }
-
+ */
   return (
     <>
       <main>
