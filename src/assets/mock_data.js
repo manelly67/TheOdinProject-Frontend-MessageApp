@@ -8,4 +8,9 @@ const resGETsignup = {
     passwordRequirements: passwordRequirements,
 };
 
-export {resGETsignup};
+const resGETlogin = {
+  title: "LOGIN",
+  errors: "",
+};
+
+export {resGETsignup, resGETlogin};

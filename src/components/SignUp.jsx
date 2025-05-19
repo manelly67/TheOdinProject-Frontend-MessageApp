@@ -17,7 +17,7 @@ const SingUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const { signup } = styles;
+  const { formSection } = styles;
 
   console.log(user);
 
@@ -99,7 +99,7 @@ const SingUp = () => {
             >HOME</Link>
           </div>
 
-          <section className={signup}>
+          <section className={formSection}>
             {user === undefined ? (
               <>
                 <div>

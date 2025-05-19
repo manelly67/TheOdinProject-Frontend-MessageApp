@@ -2,6 +2,7 @@ import App from "../App";
 import ErrorPage from "./Error_page";
 import MainView from "./MainView";
 import SignUp from "./SignUp";
+import Login from "./Login";
 
 const routes = [
   {
@@ -13,6 +14,10 @@ const routes = [
   {
     path: "sign_up",
     element: <SignUp />,
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
   
   {

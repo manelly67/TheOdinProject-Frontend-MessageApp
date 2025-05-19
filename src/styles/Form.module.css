@@ -7,10 +7,10 @@
 }
 
 @media (max-width: 430px) {
-    .signup {
+    .formSection {
         margin-top: 14%;
     }
-    .signup>div>h2{
+    .formSection >div >h2{
         font-size: 1.7em;
         text-align: left;
         padding-left: 10px;
@@ -36,11 +36,11 @@
 
 @media (min-width: 431px) {
 
-    .signup {
+    .formSection {
         margin-top: 3%;
     }
 
-form {
+    form {
     position: relative;
     max-width: 80%;
     padding-top: 10px;
@@ -48,14 +48,14 @@ form {
     display:grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-}
+    }
 
-form > div {
+    form > div {
     align-items: center;
     display:grid;
     grid-template-columns: 0.25fr 0.75fr;
     grid-template-rows: 1fr 
-}
+    }
 }
 
 input {

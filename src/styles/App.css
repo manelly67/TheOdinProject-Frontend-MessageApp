@@ -196,6 +196,7 @@ nav {
 
 
 .lateral > button {
+  width: 40px;
   font-size: 2rem;
   padding: 2%;
   --X: calc(0.55 * 100vw);

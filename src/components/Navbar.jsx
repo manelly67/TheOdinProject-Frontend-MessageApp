@@ -4,7 +4,8 @@ import { useState } from "react";
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
   const [classes, setClasses] = useState("lateral animate-in");
-
+  const { token } = props;
+  console.log(token);
   function closeNav() {
     setShow(false);
   }
@@ -31,10 +32,17 @@ const Navbar = (props) => {
         ) : null
       ) : (
         <nav>
-          <Link to="/sign_up">Sign Up</Link>
-          <Link>Login</Link>
-          <Link>Guest Mode</Link>
-          <Link>Logout</Link>
+          {token === null ? (
+            <>
+              <Link to="/sign_up">Sign Up</Link>
+              <Link to="/login" state={{ token: token }}>
+                Login
+              </Link>
+              <Link>Guest Mode</Link>
+            </>
+          ) : (
+            <Link to="/logout">Logout</Link>
+          )}
         </nav>
       )}
 
@@ -44,6 +52,7 @@ const Navbar = (props) => {
           classes={classes}
           setClasses={setClasses}
           closeNav={closeNav}
+          token={token}
         />
       ) : null}
     </>
@@ -54,10 +63,17 @@ function LateralNavbar(props) {
   return (
     <>
       <nav className={`${props.classes}`}>
-        <Link to="sign_up">Sign Up</Link>
-        <Link>Login</Link>
-        <Link>Guest Mode</Link>
-        <Link>Logout</Link>
+        {props.token === null ? (
+          <>
+            <Link to="/sign_up">Sign Up</Link>
+            <Link to="/login" state={{ token: props.token }}>
+              Login
+            </Link>
+            <Link>Guest Mode</Link>
+          </>
+        ) : (
+          <Link to="/logout">Logout</Link>
+        )}
 
         <button
           onClick={() => {
