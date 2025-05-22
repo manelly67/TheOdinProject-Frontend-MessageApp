@@ -19,16 +19,7 @@ const Logout = () => {
       ? JSON.parse(localStorage.getItem("token"))
       : null;
 
-  /* useEffect(() => {
-    switch (responseData === "{}") {
-      case true:
-        getData(url);
-        break;
-      case false:
-        break;
-    }
-  }); */
-
+  
   const logoutSession = useCallback(async() => {
     try {
       const response = await fetch(url, {
@@ -56,26 +47,6 @@ const Logout = () => {
     }
   }, [logoutSession]);
 
-  /* async function logoutSession() {
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
-      const temp = await response.json();
-      setResponseData(temp);
-      localStorage.setItem("token", JSON.stringify(null));
-      return setResponseData;
-    } catch (error) {
-      alert("Something was wrong. try again later");
-      console.log(error);
-    }
-  }
- */
   return (
     <>
       <main>

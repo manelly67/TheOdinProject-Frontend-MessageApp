@@ -195,15 +195,15 @@ nav {
 }
 
 
-.lateral > button {
+.lateral> button {
   width: 40px;
-  font-size: 2rem;
-  padding: 2%;
+  font-size: 1.5rem;
+  padding: 1%;
   --X: calc(0.55 * 100vw);
 
   background-color: var(--color-base-text-2);
 
-  transform: translate(var(--X),-130px);
+  transform: translate(var(--X),-50px);
 }
 
 

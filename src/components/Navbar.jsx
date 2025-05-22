@@ -75,7 +75,7 @@ function LateralNavbar(props) {
           <Link to="/logout">Logout</Link>
         )}
 
-        <button
+        <button className="lateralButton"
           onClick={() => {
             props.setClasses("lateral animate-out");
             setTimeout(props.closeNav, 1300);
