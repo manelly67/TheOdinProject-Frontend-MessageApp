@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Form.module.css";
@@ -12,15 +13,13 @@ const Logout = () => {
   if (titleDiv) {
     titleDiv.textContent = "LOGOUT";
   }
+  const location = useLocation();
+  const { token } = location.state !== null ? location.state : null;
   const { formSection } = styles;
   const [responseData, setResponseData] = useState("{}");
-  const token =
-    localStorage.getItem("token") !== undefined
-      ? JSON.parse(localStorage.getItem("token"))
-      : null;
-
   
-  const logoutSession = useCallback(async() => {
+
+  const logoutSession = useCallback(async () => {
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -31,14 +30,17 @@ const Logout = () => {
         },
       });
       const temp = await response.json();
-      setResponseData(temp);
-      localStorage.setItem("token", JSON.stringify(null));
+      console.log(temp);
+      if (temp) {
+        setResponseData(temp);
+        localStorage.setItem("token", JSON.stringify(null));
+      }
       return setResponseData;
     } catch (error) {
       alert("Something was wrong. try again later");
       console.log(error);
     }
-  },[token]);
+  }, [token]);
 
   useEffect(() => {
     if (!didInit) {
@@ -72,16 +74,14 @@ const Logout = () => {
               {!responseData.text ? (
                 <div>Logging out...</div>
               ) : (
-                <h2>{responseData.text}</h2>
+                <h4>{responseData.text}</h4>
               )}
             </div>
             <div>
-              {!responseData.err ? (
-                null
-              ) : (
+              {!responseData.err ? null : (
                 <>
-                <p>{responseData.err}</p>
-                <p>You are already logout</p>
+                  <p>{responseData.err}</p>
+                  <p>You are already logout</p>
                 </>
               )}
             </div>

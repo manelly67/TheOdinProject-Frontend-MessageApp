@@ -16,14 +16,9 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { formSection } = styles;
-  console.log(token);
-  // active user has all users details
-  const [activeUser, setActiveUser] = useState(
-    token === null ? null : responseData.user
-  );
+ 
   const [activeToken, setActiveToken] = useState(token);
 
-  console.log(activeUser);
 
   if (titleDiv) {
     titleDiv.textContent = "LOGIN";
@@ -46,9 +41,6 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         setResponseData(data);
-        if (data.user !== undefined) {
-          setActiveUser(data.user);
-        }
         if (data.token !== undefined) {
           localStorage.setItem("token", JSON.stringify(data.token));
           setActiveToken(data.token);
@@ -139,7 +131,6 @@ const Login = () => {
               <Navigate
                 to="/main_app"
                 replace={true}
-                state={{ user: activeUser }}
               />
             )}
           </section>

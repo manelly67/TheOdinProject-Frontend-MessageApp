@@ -22,6 +22,7 @@ const ToggleTheme = (props) => {
       onClick={() => {
         toggleTheme();
       }}
+      aria-label="toggle theme dark/light"
     >
       <Icon path={mdiThemeLightDark} size={1} />
     </button>

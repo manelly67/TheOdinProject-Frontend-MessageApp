@@ -1,3 +1,5 @@
+import imgLargeMedium from "./assets/img/paloma_medium_large.jpg";
+import imgSmall from "./assets/img/paloma_small.jpg";
 import { useNavigate } from "react-router-dom";
 import "./styles/App.css";
 import ToggleTheme from "./components/ToggleTheme";
@@ -54,7 +56,7 @@ function App() {
               >
                 <p style={{ fontSize: "3rem" , color:"burlywood"}}>ON</p>
               </div>
-              <Imagen />
+              <Imagen imgLargeMedium={imgLargeMedium} imgSmall={imgSmall} />
             </button>
          
         </section>

@@ -41,7 +41,7 @@ const Navbar = (props) => {
               <Link>Guest Mode</Link>
             </>
           ) : (
-            <Link to="/logout">Logout</Link>
+            <Link to="/logout" state={{ token: token }}>Logout</Link>
           )}
         </nav>
       )}

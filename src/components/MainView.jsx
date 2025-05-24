@@ -1,23 +1,25 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useLocation } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
 import Navbar from "./Navbar";
 import ChatView from "./ChatView";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Chat.module.css";
-import {
+/* import {
   userDetails,
   resFetchAllChatsActiveUser,
   restFetchAllUsers,
 } from "../assets/mock_data";
-
+ */
 const MainView = () => {
-  const location = useLocation();
+ 
   const [screenWidth, setScreenWidth] = useState(0);
-  const [wakeUp, setWakeUp] = useState(true); // RECORDAR REGRESAR A FALSE
+  const [wakeUp, setWakeUp] = useState(false); // RECORDAR REGRESAR A FALSE
   const [message, setMessage] = useState(null);
-  const [allChats, setAllChats] = useState(resFetchAllChatsActiveUser.chats); // RECORDAR REGRESAR A NULL
-  const [allUsers, setAllUsers] = useState(restFetchAllUsers.list_of_users); // RECORDAR REGRESAR A NULL
+  /* const [allChats, setAllChats] = useState(resFetchAllChatsActiveUser.chats);  */// RECORDAR REGRESAR A NULL
+  const [allChats, setAllChats] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [allUsers, setAllUsers] = useState(null); 
+  /* const [allUsers, setAllUsers] = useState(restFetchAllUsers.list_of_users);  */// RECORDAR REGRESAR A NULL
   const { chatbox } = styles;
 
   const token =
@@ -25,30 +27,31 @@ const MainView = () => {
       ? JSON.parse(localStorage.getItem("token"))
       : null;
 
- /*  const userDetails = useMemo(() => { //REMEMBER
-    return getUserDetails(token, location.state);
-  }, [token, location.state]);
- */
-  const userId = userDetails === null ? null : userDetails.id;
+// VER SI PUEDO CONVERTIR ESTO EN UN USECALLBACK
+const userDetails = useMemo(() => { 
+    return getUserDetails(allUsers,userId);
+  }, [allUsers,userId]);
+ 
+ console.log(userDetails);
+ 
 
   console.log(`token=${token} user=${userDetails} userId=${userId}`);
-  console.log(allChats);
+  console.log(allChats);  
 
-  function getUserDetails(token, arg2) {
-    // arg2 is location.state
-    switch (token === null) {
+  function getUserDetails(allUsers,userId) {
+    switch (userId === null) {
       case true:
         return null;
       case false:
-        switch (arg2 !== null) {
-          case true: {
-            const { user } = arg2;
-            console.log(user);
-            return user;
+        switch(allUsers==null){
+          case true:
+          return null;
+          case false:{
+            let filtered = allUsers.filter((e)=> e.id===userId);
+            return filtered[0];
           }
-          case false:
-            return null;
         }
+      break;
     }
   }
 
@@ -66,6 +69,7 @@ const MainView = () => {
       console.log(temp);
       if (temp.chats) {
         setAllChats(temp.chats);
+        setUserId(temp.user);
       }
     } catch (error) {
       alert("Something was wrong. try again later");
@@ -112,7 +116,7 @@ const MainView = () => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
-  /* 
+  
   //HABILITAR AL FINAL
   useEffect(() => {
     if(token!==null){
@@ -125,7 +129,7 @@ const MainView = () => {
     callToServer();
   }, [callToServer]);
 
- */
+ 
 
   return (
     <>
@@ -160,6 +164,7 @@ const MainView = () => {
                 token={token}
                 allChats={allChats}
                 allUsers={allUsers}
+                getAllChats={getAllChats}
               />
             )}
           </section>
