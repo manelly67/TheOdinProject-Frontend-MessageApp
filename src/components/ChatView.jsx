@@ -70,7 +70,7 @@ const ChatView = (props) => {
 
 console.log(messages);
 
-  // QUITAR ESTOS USE MEMO Y USAR USE STATE
+  // VER COMO SE COMPORTA AL CREAR UN NUEVO CHAT
   const usersInChats = useMemo(() => {
     if(chats){
       return getObjUsers(chats, userId);
@@ -243,8 +243,6 @@ console.log(messages);
             selectedChat={selectedChat}
             userTo={userTo}
             token={token}
-            filteredChatObj={filteredChatObj}
-            setFilteredChatObj={setFilteredChatObj}
             getAllChats={getAllChats}
           />
         </div>

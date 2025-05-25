@@ -228,7 +228,7 @@
 
 
 .formTag{
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   gap: 2px;
@@ -236,13 +236,14 @@
 }
 
 .labelTag{
+ width: 10px;
  position: absolute;
  top: 1%;
 }
 
 .textareaTag{
  height: 60px;
- width: 80%;
+ width: var(--set-width);
 }
 
 
@@ -265,4 +266,6 @@
   height: 20px;
   font-size: 12px;
   color: #d0dde7;
+  position: absolute;
+  bottom: -10%;
 }

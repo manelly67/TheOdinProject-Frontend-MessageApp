@@ -59,15 +59,15 @@ body {
     .phonebox {
       --defining-width: calc(0.7 * 100vw);
       width: var(--defining-width);
-      height: calc(var(--defining-width) * 1);
+      height: calc(var(--defining-width) * 3);
     }
   }
 
-  @media (min-width: 360px) and (max-width: 699px) {
+  @media (min-width: 361px) and (max-width: 699px) {
     .phonebox {
       --defining-width: calc(0.8 * 100vw);
       width: var(--defining-width);
-      height: calc(var(--defining-width) * 2);
+      height: calc(var(--defining-width) * 2.2);
     }
   }
   
@@ -75,7 +75,7 @@ body {
     .phonebox {
       --defining-width: calc(0.65 * 100vw);
       width: var(--defining-width);
-      height: calc(var(--defining-width) * 1.5);
+      height: calc(var(--defining-width) * 1.7);
     }
   }
 
@@ -84,7 +84,7 @@ body {
     .phonebox {
       --defining-width: calc(0.5 * 100vw);
       width: var(--defining-width);
-      height: calc(var(--defining-width) * 1.2);
+      height: calc(var(--defining-width) * 1.5);
     }
   }
   

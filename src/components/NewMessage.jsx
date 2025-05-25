@@ -8,8 +8,6 @@ const NewMessage = (props) => {
     selectedChat,
     userTo,
     token,
-    filteredChatObj,
-    setFilteredChatObj,
     getAllChats,
   } = props;
   const {
@@ -49,10 +47,8 @@ const NewMessage = (props) => {
           setFeedback(data.message);
         } else {
           if (data.message_details) {
-            let temp = filteredChatObj;
-            temp.messages.push(data.message_details);
-            setFilteredChatObj(temp);
-            getAllChats();
+            getAllChats();  // refresh the user chats
+            setText(null);
           } else {
             setFeedback(data.message);
           }
@@ -91,7 +87,7 @@ const NewMessage = (props) => {
             <div>
               {errors ? <ErrorMessage errors={errors} /> : null}
               {feedback ? <p>feedback</p> : null}
-              <div>
+              
                 <form className={formTag}>
                   <label htmlFor="new_msg" className={labelTag}>
                     ➡️
@@ -114,7 +110,7 @@ const NewMessage = (props) => {
                     </button>
                   </div>
                 </form>
-              </div>
+              
             </div>
           )}
         </section>
