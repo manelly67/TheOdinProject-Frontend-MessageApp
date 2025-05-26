@@ -1,50 +1,50 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styles from "../styles/Chat.module.css";
-import no_avatar from "../assets/img/no_avatar.jpg";
+import MainUser from "./MainUser";
 import MessagesInChat from "./MessagesInChat";
 import NewMessage from "./NewMessage";
 import NewChat from "./NewChat";
+import ListActiveChats from "./ListActiveChats";
 
 const ChatView = (props) => {
-  const {
-    grid,
-    buttonEditProfile,
-    chatsList,
-    buttonImage,
-    buttonViewProfile,
-    displayMessages,
-    NewMessageBox,
-  } = styles;
+  const { grid, chatsList, displayMessages, NewMessageBox, buttonNewChat } = styles;
   const { userDetails, userId, allChats, allUsers, token, getAllChats } = props;
   const { profile } = userDetails;
   const chats = allChats;
   const [selectedChat, setSelectedChat] = useState(null);
   const [userTo, setUserTo] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [usersInChats, setUsersInChats] = useState([]);
 
   const getObjUsers = useCallback(
     (chats, userId) => {
-      switch (allUsers !== null) {
-        case true: {
-          let array = [];
-          chats.map((e) => {
-            let [user] = e.usersInChat.filter((x) => {
-              return x !== userId;
+      if (chats) {
+        switch (allUsers !== null) {
+          case true: {
+            let array = [];
+            chats.map((e) => {
+              let [user] = e.usersInChat.filter((x) => {
+                return x !== userId;
+              });
+              let filtered = allUsers.filter((e) => {
+                return e.id === user;
+              });
+              let obj = {
+                chatId: e.id,
+                userId: user,
+                userProfile: filtered[0].profile,
+              };
+              array.push(obj);
             });
-            let filtered = allUsers.filter((e) => {
-              return e.id === user;
-            });
-            let obj = {
-              chatId: e.id,
-              userId: user,
-              userProfile: filtered[0].profile,
-            };
-            array.push(obj);
-          });
-          return array;
+            setUsersInChats(array);
+            break;
+          }
+          case false:
+            setUsersInChats([]);
+            break;
         }
-        case false:
-          return [];
+      } else {
+        setUsersInChats([]);
       }
     },
     [allUsers]
@@ -67,125 +67,22 @@ const ChatView = (props) => {
     [chats]
   );
 
-  // VER COMO SE COMPORTA AL CREAR UN NUEVO CHAT
-  const usersInChats = useMemo(() => {
-    if (chats) {
-      return getObjUsers(chats, userId);
-    } else {
-      return [];
-    }
-  }, [chats, getObjUsers, userId]);
-
   console.log(usersInChats);
+
+  useEffect(() => {
+    return getObjUsers(chats, userId);
+  }, [getObjUsers, chats, userId]);
 
   useEffect(() => {
     return getMessages(selectedChat);
   }, [getMessages, selectedChat]);
-
-  const listItems = usersInChats.map((e) => (
-    <li key={e.userId} id={e.userId}>
-      <div>
-        <button
-          className={buttonImage}
-          onClick={() => {
-            setSelectedChat(e.chatId);
-            setUserTo(e.userId);
-          }}
-          aria-label={`active chat user ${e.userProfile.nametoshow}`}
-        >
-          {!e.userProfile ? (
-            <img
-              src={no_avatar}
-              alt="there is no avatar"
-              width="50px"
-              height="50px"
-            ></img>
-          ) : (
-            <img
-              src={e.userProfile.avatar.src_image}
-              alt="avatar"
-              width="50px"
-              height="50px"
-            ></img>
-          )}
-        </button>
-      </div>
-      <div>
-        {e.userProfile === null ? (
-          <p>no name</p>
-        ) : (
-          <>
-            <p>{e.userProfile.nametoshow}</p>
-            <p>{e.userProfile.status}</p>
-          </>
-        )}
-        <button className={buttonViewProfile}>profile</button>
-      </div>
-    </li>
-  ));
 
   return (
     <>
       <div style={{ gridColumn: "1/5", gridRow: "1/2" }}></div>
 
       <section className={grid}>
-        <div
-          style={{
-            gridColumn: "1/2",
-            gridRow: "1/2",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
-          }}
-        >
-          {!profile ? (
-            <img
-              src={no_avatar}
-              alt="there is no avatar"
-              width="50px"
-              height="50px"
-            ></img>
-          ) : (
-            <img
-              src={profile.avatar.src_image}
-              alt="avatar"
-              width="50px"
-              height="50px"
-            ></img>
-          )}
-        </div>
-        <div
-          style={{
-            gridColumn: "2/4",
-            gridRow: "1/2",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
-            position: "relative",
-            alignContent: "flex-start",
-            paddingTop: "2px",
-          }}
-        >
-          {!profile ? (
-            <>
-              <div>
-                <p>{userDetails.username}</p>
-                <div>
-                  <button className={buttonEditProfile}>edit profile</button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                style={{
-                  color: `${profile.textcolor.colorcode}`,
-                }}
-              >
-                <p>{profile.nametoshow}</p>
-                <div>
-                  <button className={buttonEditProfile}>edit profile</button>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+        <MainUser userDetails={userDetails} />
         <div
           style={{
             gridColumn: "4/5",
@@ -203,9 +100,11 @@ const ChatView = (props) => {
               token={token}
               allUsers={allUsers}
               getObjUsers={getObjUsers}
+              buttonNewChat={buttonNewChat}
             />
           </div>
         </div>
+
         <div
           style={{
             gridColumn: "1/2",
@@ -214,17 +113,13 @@ const ChatView = (props) => {
           }}
           className={chatsList}
         >
-          {listItems.length === 0 ? (
-            <p>No Active Chats</p>
-          ) : (
-            <>
-              <p style={{ fontSize: "12px", width: "56px", margin: "0 auto" }}>
-                active chats
-              </p>
-              <ul>{listItems.length > 0 ? <>{listItems}</> : null}</ul>
-            </>
-          )}
+          <ListActiveChats
+            usersInChats={usersInChats}
+            setSelectedChat={setSelectedChat}
+            setUserTo={setUserTo}
+          />
         </div>
+
         <div
           style={{
             gridColumn: "2/5",
@@ -232,10 +127,7 @@ const ChatView = (props) => {
           }}
           className={displayMessages}
         >
-          <MessagesInChat
-            messages={messages}
-            userId={userId}
-          />
+          <MessagesInChat messages={messages} userId={userId} />
         </div>
         <div
           style={{
