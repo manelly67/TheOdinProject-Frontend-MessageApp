@@ -1,7 +1,7 @@
 import styles from "../styles/Chat.module.css";
 
 const MessagesInChat = (props) => {
-  const { messages, userId, selectedChat } = props;
+  const { messages, userId } = props;
   const { dateTxt, txt, msgMe, msgOther } = styles;
   console.log(messages);
 

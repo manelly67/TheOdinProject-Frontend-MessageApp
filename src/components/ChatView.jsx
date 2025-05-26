@@ -3,12 +3,11 @@ import styles from "../styles/Chat.module.css";
 import no_avatar from "../assets/img/no_avatar.jpg";
 import MessagesInChat from "./MessagesInChat";
 import NewMessage from "./NewMessage";
+import NewChat from "./NewChat";
 
 const ChatView = (props) => {
-  
   const {
     grid,
-    buttonNewChat,
     buttonEditProfile,
     chatsList,
     buttonImage,
@@ -21,14 +20,12 @@ const ChatView = (props) => {
   const chats = allChats;
   const [selectedChat, setSelectedChat] = useState(null);
   const [userTo, setUserTo] = useState(null);
-  const [filteredChatObj, setFilteredChatObj] = useState(null);
   const [messages, setMessages] = useState([]);
-  
 
   const getObjUsers = useCallback(
     (chats, userId) => {
-      switch(allUsers!==null){
-        case true:{
+      switch (allUsers !== null) {
+        case true: {
           let array = [];
           chats.map((e) => {
             let [user] = e.usersInChat.filter((x) => {
@@ -48,41 +45,42 @@ const ChatView = (props) => {
         }
         case false:
           return [];
-      };
+      }
     },
     [allUsers]
   );
 
-  const getMessages = useCallback((selectedChat)=>{
-    switch(selectedChat===null){
-      case true:
-        setMessages([]);
-      break;
-      case false:{
-        const filtered = chats.filter((e)=>e.id===selectedChat);
-        setFilteredChatObj(filtered[0]);
-        console.log(filtered[0]['messages']);
-        setMessages(filtered[0]['messages']);
+  const getMessages = useCallback(
+    (selectedChat) => {
+      switch (selectedChat === null) {
+        case true:
+          setMessages([]);
+          break;
+        case false:
+          {
+            const filtered = chats.filter((e) => e.id === selectedChat);
+            setMessages(filtered[0]["messages"]);
+          }
+          break;
       }
-      break;
-    };
-  },[chats]);
-
-console.log(messages);
+    },
+    [chats]
+  );
 
   // VER COMO SE COMPORTA AL CREAR UN NUEVO CHAT
   const usersInChats = useMemo(() => {
-    if(chats){
+    if (chats) {
       return getObjUsers(chats, userId);
-    }else{
+    } else {
       return [];
     }
-  }, [chats,getObjUsers,userId]);
+  }, [chats, getObjUsers, userId]);
 
+  console.log(usersInChats);
 
-  useEffect(()=>{
+  useEffect(() => {
     return getMessages(selectedChat);
-  },[getMessages,selectedChat]);
+  }, [getMessages, selectedChat]);
 
   const listItems = usersInChats.map((e) => (
     <li key={e.userId} id={e.userId}>
@@ -116,7 +114,10 @@ console.log(messages);
         {e.userProfile === null ? (
           <p>no name</p>
         ) : (
-          <p>{e.userProfile.nametoshow}</p>
+          <>
+            <p>{e.userProfile.nametoshow}</p>
+            <p>{e.userProfile.status}</p>
+          </>
         )}
         <button className={buttonViewProfile}>profile</button>
       </div>
@@ -197,7 +198,12 @@ console.log(messages);
               color: `${profile.textcolor.colorcode}`,
             }}
           >
-            <button className={buttonNewChat}>new CHAT</button>
+            <NewChat
+              userId={userId}
+              token={token}
+              allUsers={allUsers}
+              getObjUsers={getObjUsers}
+            />
           </div>
         </div>
         <div
@@ -229,7 +235,6 @@ console.log(messages);
           <MessagesInChat
             messages={messages}
             userId={userId}
-            selectedChat={selectedChat}
           />
         </div>
         <div
