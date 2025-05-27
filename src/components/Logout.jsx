@@ -30,7 +30,6 @@ const Logout = () => {
         },
       });
       const temp = await response.json();
-      console.log(temp);
       if (temp) {
         setResponseData(temp);
         localStorage.setItem("token", JSON.stringify(null));
@@ -80,7 +79,7 @@ const Logout = () => {
             <div>
               {!responseData.err ? null : (
                 <>
-                  <p>{responseData.err}</p>
+                  <p>{responseData.err.message}</p>
                   <p>You are already logout</p>
                 </>
               )}

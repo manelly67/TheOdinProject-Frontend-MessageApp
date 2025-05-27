@@ -2,6 +2,8 @@ import no_avatar from "../assets/img/no_avatar.jpg";
 import styles from "../styles/Chat.module.css";
 
 const MainUser = (props) => {
+  const bgcolor = 'white';
+  const txtcolor = 'black';  
 const { userDetails } = props;
 const { profile } = userDetails;
 const { buttonEditProfile} = styles;
@@ -12,7 +14,7 @@ return(
           style={{
             gridColumn: "1/2",
             gridRow: "1/2",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
           }}
         >
           {!profile ? (
@@ -35,7 +37,7 @@ return(
           style={{
             gridColumn: "2/4",
             gridRow: "1/2",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
             position: "relative",
             alignContent: "flex-start",
             paddingTop: "2px",
@@ -54,7 +56,7 @@ return(
             <>
               <div
                 style={{
-                  color: `${profile.textcolor.colorcode}`,
+                  color: !profile ? txtcolor : `${profile.textcolor.colorcode}`,
                 }}
               >
                 <p>{profile.nametoshow}</p>

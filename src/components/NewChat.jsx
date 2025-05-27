@@ -5,14 +5,15 @@ import styles from "../styles/OptionsList.module.css";
 import { urlAddresses } from "../assets/urlAddresses";
 
 const NewChat = (props) => {
-  
   const { userId, token, allUsers, getObjUsers, buttonNewChat } = props;
   const url = urlAddresses.new_chat;
   const [usertoId, setUsertoId] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
+  console.log(usertoId);
 
   async function submitSelect(event) {
     event.preventDefault();
+    console.log(usertoId);
     const bodydata = {
       usertoId,
     };
@@ -27,6 +28,7 @@ const NewChat = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.message) {
           alert(data.message);
         }
@@ -67,7 +69,7 @@ const NewChat = (props) => {
 export default NewChat;
 
 function DropMenu(props) {
-  const { element, looks, close, item } = props.styles;
+  const { element, looks, close, submit } = props.styles;
   const {
     setShowMenu,
     setUsertoId,
@@ -78,16 +80,11 @@ function DropMenu(props) {
   } = props;
   return (
     <>
-      <button
-        onClick={() => {
-          setShowMenu(false);
-        }}
-        className={close}
-      >
-        close
-      </button>
+    <div  className={`${element} ${looks}`}>
+    
+      <label htmlFor="selection">choose an user</label>
       <select
-        className={`${element} ${looks}`}
+        id="selection"
         name="userTo"
         onChange={(event) => setUsertoId(event.target.value)}
       >
@@ -99,51 +96,42 @@ function DropMenu(props) {
                   {e.id === userId ? null : (
                     <option key={e.id} value={e.id}>
                       {!e.profile ? (
-                        <div>
-                          <p>{e.username}</p>
-                          <p>{e.status}</p>
-                        </div>
+                        <p>{`${e.username} | ${e.status}`}</p>
+                      ) : !e.profile.nametoshow ? (
+                        <p>{`${e.username} | ${e.status}`}</p>
                       ) : (
-                        <div className={item}>
-                          {!e.profile.nametoshow ? (
-                            <p>{e.username}</p>
-                          ) : (
-                            <div>
-                              {!e.profile.avatar.src_image ? (
-                                <img
-                                  src={no_avatar}
-                                  alt="avatar"
-                                  width="50px"
-                                  height="50px"
-                                ></img>
-                              ) : (
-                                <img
-                                  src={e.profile.avatar.src_image}
-                                  alt="avatar"
-                                  width="50px"
-                                  height="50px"
-                                ></img>
-                              )}
-
-                              <p>{e.profile.nametoshow}</p>
-                              <p>{e.status}</p>
-                            </div>
-                          )}
-                        </div>
+                        <p>{`${e.profile.nametoshow} | ${e.status}`}</p>
                       )}
                     </option>
                   )}
                 </>
               );
             })}
+            
       </select>
+      <div>
       <button
+      className={submit}
         onClick={(event) => {
           submitSelect(event);
         }}
       >
         submit
       </button>
+      <button
+        onClick={() => {
+          setShowMenu(false);
+        }}
+        className={close}
+      >
+        cancel
+      </button>
+
+      </div>
+      
+
+    </div>
+      
     </>
   );
 }

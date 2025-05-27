@@ -11,7 +11,11 @@ import styles from "../styles/Chat.module.css";
 } from "../assets/mock_data";
  */
 const MainView = () => {
- 
+  const titleDiv = document.querySelector("title");
+  if (titleDiv) {
+    titleDiv.textContent = "MESSAGING APP | USER";
+  }
+
   const [screenWidth, setScreenWidth] = useState(0);
   const [wakeUp, setWakeUp] = useState(false); // RECORDAR REGRESAR A FALSE
   const [message, setMessage] = useState(null);

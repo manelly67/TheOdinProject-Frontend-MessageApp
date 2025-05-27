@@ -7,9 +7,14 @@ import NewChat from "./NewChat";
 import ListActiveChats from "./ListActiveChats";
 
 const ChatView = (props) => {
+  const bgcolor = 'white';
+  const txtcolor = 'black';
   const { grid, chatsList, displayMessages, NewMessageBox, buttonNewChat } = styles;
   const { userDetails, userId, allChats, allUsers, token, getAllChats } = props;
-  const { profile } = userDetails;
+  let profile = null;
+  if(userDetails.profile){
+    profile = userDetails.profile;
+  }
   const chats = allChats;
   const [selectedChat, setSelectedChat] = useState(null);
   const [userTo, setUserTo] = useState(null);
@@ -87,12 +92,12 @@ const ChatView = (props) => {
           style={{
             gridColumn: "4/5",
             gridRow: "1/2",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
           }}
         >
           <div
             style={{
-              color: `${profile.textcolor.colorcode}`,
+              color: !profile ? txtcolor : `${profile.textcolor.colorcode}`,
             }}
           >
             <NewChat
@@ -109,7 +114,7 @@ const ChatView = (props) => {
           style={{
             gridColumn: "1/2",
             gridRow: "2/4",
-            backgroundColor: `${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
           }}
           className={chatsList}
         >
