@@ -169,6 +169,7 @@ const userDetails = useMemo(() => {
                 allChats={allChats}
                 allUsers={allUsers}
                 getAllChats={getAllChats}
+                getListOfUsers={getListOfUsers}
               />
             )}
           </section>

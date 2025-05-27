@@ -7,12 +7,21 @@ import NewChat from "./NewChat";
 import ListActiveChats from "./ListActiveChats";
 
 const ChatView = (props) => {
-  const bgcolor = 'white';
-  const txtcolor = 'black';
-  const { grid, chatsList, displayMessages, NewMessageBox, buttonNewChat } = styles;
-  const { userDetails, userId, allChats, allUsers, token, getAllChats } = props;
+  const bgcolor = "white";
+  const txtcolor = "black";
+  const { grid, chatsList, displayMessages, NewMessageBox, buttonNewChat } =
+    styles;
+  const {
+    userDetails,
+    userId,
+    allChats,
+    allUsers,
+    token,
+    getAllChats,
+    getListOfUsers,
+  } = props;
   let profile = null;
-  if(userDetails.profile){
+  if (userDetails.profile) {
     profile = userDetails.profile;
   }
   const chats = allChats;
@@ -92,7 +101,9 @@ const ChatView = (props) => {
           style={{
             gridColumn: "4/5",
             gridRow: "1/2",
-            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile
+              ? bgcolor
+              : `${profile.bgcolor.colorcode}`,
           }}
         >
           <div
@@ -104,7 +115,8 @@ const ChatView = (props) => {
               userId={userId}
               token={token}
               allUsers={allUsers}
-              getObjUsers={getObjUsers}
+              getAllChats={getAllChats}
+              getListOfUsers={getListOfUsers}
               buttonNewChat={buttonNewChat}
             />
           </div>
@@ -114,7 +126,9 @@ const ChatView = (props) => {
           style={{
             gridColumn: "1/2",
             gridRow: "2/4",
-            backgroundColor: !profile ? bgcolor :`${profile.bgcolor.colorcode}`,
+            backgroundColor: !profile
+              ? bgcolor
+              : `${profile.bgcolor.colorcode}`,
           }}
           className={chatsList}
         >

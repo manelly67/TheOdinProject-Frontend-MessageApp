@@ -5,7 +5,7 @@ import styles from "../styles/OptionsList.module.css";
 import { urlAddresses } from "../assets/urlAddresses";
 
 const NewChat = (props) => {
-  const { userId, token, allUsers, getObjUsers, buttonNewChat } = props;
+  const { userId, token, allUsers, getAllChats, buttonNewChat } = props;
   const url = urlAddresses.new_chat;
   const [usertoId, setUsertoId] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
@@ -13,6 +13,7 @@ const NewChat = (props) => {
 
   async function submitSelect(event) {
     event.preventDefault();
+    console.log("llamando la funcion New Chat");
     console.log(usertoId);
     const bodydata = {
       usertoId,
@@ -33,7 +34,8 @@ const NewChat = (props) => {
           alert(data.message);
         }
         if (data.chat) {
-          getObjUsers();
+          getListOfUsers();
+          getAllChats();
         }
       })
       .catch((err) => {
