@@ -38,7 +38,7 @@ const Navbar = (props) => {
               <Link to="/login" state={{ token: token }}>
                 Login
               </Link>
-              <Link>Guest Mode</Link>
+              <Link to="/login_as_guest" state={{ token: token }}>Guest Mode</Link>
             </>
           ) : (
             <Link to="/logout" state={{ token: token }}>Logout</Link>
@@ -69,7 +69,7 @@ function LateralNavbar(props) {
             <Link to="/login" state={{ token: props.token }}>
               Login
             </Link>
-            <Link>Guest Mode</Link>
+            <Link to="/login_as_guest" state={{ token: props.token }}>Guest Mode</Link>
           </>
         ) : (
           <Link to="/logout">Logout</Link>

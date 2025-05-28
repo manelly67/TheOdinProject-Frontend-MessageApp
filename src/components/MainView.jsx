@@ -19,11 +19,11 @@ const MainView = () => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [wakeUp, setWakeUp] = useState(false); // RECORDAR REGRESAR A FALSE
   const [message, setMessage] = useState(null);
-  /* const [allChats, setAllChats] = useState(resFetchAllChatsActiveUser.chats);  */// RECORDAR REGRESAR A NULL
+  /* const [allChats, setAllChats] = useState(resFetchAllChatsActiveUser.chats);  */ // RECORDAR REGRESAR A NULL
   const [allChats, setAllChats] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [allUsers, setAllUsers] = useState(null); 
-  /* const [allUsers, setAllUsers] = useState(restFetchAllUsers.list_of_users);  */// RECORDAR REGRESAR A NULL
+  const [allUsers, setAllUsers] = useState(null);
+  /* const [allUsers, setAllUsers] = useState(restFetchAllUsers.list_of_users);  */ // RECORDAR REGRESAR A NULL
   const { chatbox } = styles;
 
   const token =
@@ -31,33 +31,15 @@ const MainView = () => {
       ? JSON.parse(localStorage.getItem("token"))
       : null;
 
-// VER SI PUEDO CONVERTIR ESTO EN UN USECALLBACK
-const userDetails = useMemo(() => { 
-    return getUserDetails(allUsers,userId);
-  }, [allUsers,userId]);
- 
- console.log(userDetails);
- 
+  const userDetails =
+    (userId === null || allUsers === null)
+      ? null
+      : allUsers.filter((e) => e.id === userId)[0];
+
+  console.log(userDetails);
 
   console.log(`token=${token} user=${userDetails} userId=${userId}`);
-  console.log(allChats);  
-
-  function getUserDetails(allUsers,userId) {
-    switch (userId === null) {
-      case true:
-        return null;
-      case false:
-        switch(allUsers==null){
-          case true:
-          return null;
-          case false:{
-            let filtered = allUsers.filter((e)=> e.id===userId);
-            return filtered[0];
-          }
-        }
-      break;
-    }
-  }
+  console.log(allChats);
 
   const getAllChats = useCallback(async () => {
     try {
@@ -120,20 +102,16 @@ const userDetails = useMemo(() => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
-  
-  //HABILITAR AL FINAL
   useEffect(() => {
-    if(token!==null){
-      getAllChats();
+    if (token !== null) {
       getListOfUsers();
+      getAllChats();
     }
-  }, [token,getAllChats,getListOfUsers]);
+  }, [token, getAllChats, getListOfUsers]);
 
   useEffect(() => {
     callToServer();
   }, [callToServer]);
-
- 
 
   return (
     <>

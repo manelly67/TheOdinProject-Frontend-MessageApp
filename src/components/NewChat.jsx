@@ -1,21 +1,31 @@
 import { useState } from "react";
-import no_avatar from "../assets/img/no_avatar.jpg";
 import styles from "../styles/OptionsList.module.css";
 
 import { urlAddresses } from "../assets/urlAddresses";
 
 const NewChat = (props) => {
-  const { userId, token, allUsers, getAllChats, buttonNewChat } = props;
+  const {
+    userId,
+    token,
+    allUsers,
+    getAllChats,
+    getListOfUsers,
+    buttonNewChat,
+  } = props;
   const url = urlAddresses.new_chat;
   const [usertoId, setUsertoId] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
-  console.log(usertoId);
+  const usersFiltered = !allUsers
+    ? []
+    : allUsers.filter((e) => e.id !== userId);
+  
+    console.log(usertoId);
 
-  async function submitSelect(event) {
+  async function submitSelect(event, usertoId) {
     event.preventDefault();
     console.log("llamando la funcion New Chat");
-    console.log(usertoId);
-    const bodydata = {
+    console.log(usertoId); // REVISAR PORQUE NO QUIERE ACTUALIZAR LA FUNCION SETUSERTOID
+ /*    const bodydata = {
       usertoId,
     };
     fetch(`${url}`, {
@@ -40,7 +50,7 @@ const NewChat = (props) => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      }); */
   }
 
   return (
@@ -57,10 +67,8 @@ const NewChat = (props) => {
         <DropMenu
           setShowMenu={setShowMenu}
           setUsertoId={setUsertoId}
-          allUsers={allUsers}
+          usersFiltered={usersFiltered}
           submitSelect={submitSelect}
-          userId={userId}
-          no_avatar={no_avatar}
           styles={styles}
         />
       )}
@@ -75,65 +83,51 @@ function DropMenu(props) {
   const {
     setShowMenu,
     setUsertoId,
-    allUsers,
+    usersFiltered,
     submitSelect,
-    userId,
-    no_avatar,
   } = props;
+ 
   return (
     <>
-    <div  className={`${element} ${looks}`}>
-    
-      <label htmlFor="selection">choose an user</label>
-      <select
-        id="selection"
-        name="userTo"
-        onChange={(event) => setUsertoId(event.target.value)}
-      >
-        {!allUsers
-          ? null
-          : allUsers.map((e) => {
-              return (
-                <>
-                  {e.id === userId ? null : (
-                    <option key={e.id} value={e.id}>
-                      {!e.profile ? (
-                        <p>{`${e.username} | ${e.status}`}</p>
-                      ) : !e.profile.nametoshow ? (
-                        <p>{`${e.username} | ${e.status}`}</p>
-                      ) : (
-                        <p>{`${e.profile.nametoshow} | ${e.status}`}</p>
-                      )}
-                    </option>
-                  )}
-                </>
-              );
-            })}
-            
-      </select>
-      <div>
-      <button
-      className={submit}
-        onClick={(event) => {
-          submitSelect(event);
-        }}
-      >
-        submit
-      </button>
-      <button
-        onClick={() => {
-          setShowMenu(false);
-        }}
-        className={close}
-      >
-        cancel
-      </button>
+      <div className={`${element} ${looks}`}>
+        <div>
+          <label htmlFor="selection">choose an user</label>
+          <select
+            id="selection"
+            name="userTo"
+            onChange={(event) => setUsertoId(event.target.value)}
+          >
+            {usersFiltered.map((e) => (
+              <option key={e.id} value={e.id}>
+                {!e.profile
+                  ? `${e.username} | ${e.status}`
+                  : !e.profile.nametoshow
+                  ? `${e.username} | ${e.status}`
+                  : `${e.profile.nametoshow} | ${e.status}`}
+              </option>
+            ))}
+          </select>
+        </div>
 
+        <div>
+          <button
+            className={submit}
+            onClick={(event) => {
+              submitSelect(event, event.target.value);
+            }}
+          >
+            submit
+          </button>
+          <button
+            onClick={() => {
+              setShowMenu(false);
+            }}
+            className={close}
+          >
+            cancel
+          </button>
+        </div>
       </div>
-      
-
-    </div>
-      
     </>
   );
 }

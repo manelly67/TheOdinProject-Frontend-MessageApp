@@ -22,8 +22,7 @@ const SingUp = () => {
   console.log(user);
 
   if (titleDiv) {
-    titleDiv.textContent =
-      responseData.title === undefined ? "SIGN UP" : responseData.title;
+    titleDiv.textContent = "SIGN UP";
   }
 
   const passwordRequirements =
@@ -32,7 +31,7 @@ const SingUp = () => {
       : responseData.passwordRequirements;
 
   const getInitUrl = useCallback(async () => {
-    /*  try {       // WORKS FINE USE LATER
+    try {       
       const response = await fetch(url);
       const responseData = await response.json();
       if (responseData.message) {
@@ -41,8 +40,7 @@ const SingUp = () => {
     } catch (error) {
       alert("Something was wrong. try again later");
       console.log(error);
-    } */
-    setResponseData(resGETsignup);
+    } 
   }, []);
 
   useEffect(() => {
@@ -191,7 +189,7 @@ const SingUp = () => {
               </>
             ) : (
               <>
-                <h2> {responseData.text} </h2>
+                <h3> {responseData.text} </h3>
                 <p> {`username: ${user.username}`} </p>
               </>
             )}
