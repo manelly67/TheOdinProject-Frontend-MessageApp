@@ -1,4 +1,3 @@
-/*  el comportamiento de centrar es una combinacion de las variables no omitir ninguna */
 .light {
     --color-bg-first: #f5f8fa;
     --color-base-text: #31485b;
@@ -9,13 +8,14 @@
     --color-base-text: #f5f8fa;
   }
 
+/*  el comportamiento de centrar es una combinacion de las variables no omitir ninguna */
 
 .element { 
     z-index: 1;
     position: fixed;
     inset: 0px;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 300px;
     max-width: 100vw;
     max-height: 100dvh;
     margin:auto;
@@ -24,14 +24,52 @@
     flex-direction: column;
     gap: 3px;
     align-items: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .looks {
     padding: 4rem;
     background-color: var(--color-bg-first);
     color: var(--color-base-text);
+}
+
+@media (max-width: 430px) {
+  .looks > p {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 431px) {
+  .looks > p{
+   font-size: 1.2rem;
+  }
+}
+
+.element > ul {
+  width: 90%;
+  height: 100px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.element > ul > li {
+  padding-top: 10px;
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.element > ul > li > button {
+  padding: 0px;
+  margin: 0px;
+  width: 40px;
+  height: 20px;
+  font-size: 12px;
+  color: #d0dde7;
 }
 
 .element > div {

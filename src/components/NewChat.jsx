@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/OptionsList.module.css";
-
+import OptionsMenu from "./OptionsMenu";
 import { urlAddresses } from "../assets/urlAddresses";
 
 const NewChat = (props) => {
@@ -18,14 +18,12 @@ const NewChat = (props) => {
   const usersFiltered = !allUsers
     ? []
     : allUsers.filter((e) => e.id !== userId);
-  
-    console.log(usertoId);
 
-  async function submitSelect(event, usertoId) {
+  console.log(usertoId);
+ 
+  async function submitSelect(event) {
     event.preventDefault();
-    console.log("llamando la funcion New Chat");
-    console.log(usertoId); // REVISAR PORQUE NO QUIERE ACTUALIZAR LA FUNCION SETUSERTOID
- /*    const bodydata = {
+    const bodydata = {
       usertoId,
     };
     fetch(`${url}`, {
@@ -50,7 +48,7 @@ const NewChat = (props) => {
       })
       .catch((err) => {
         console.log(err);
-      }); */
+      });
   }
 
   return (
@@ -58,14 +56,16 @@ const NewChat = (props) => {
       <button
         onClick={() => {
           setShowMenu(true);
+          setUsertoId(null);
         }}
         className={buttonNewChat}
       >
         new CHAT
       </button>
       {!showMenu ? null : (
-        <DropMenu
+        <OptionsMenu
           setShowMenu={setShowMenu}
+          usertoId={usertoId}
           setUsertoId={setUsertoId}
           usersFiltered={usersFiltered}
           submitSelect={submitSelect}
@@ -77,57 +77,3 @@ const NewChat = (props) => {
 };
 
 export default NewChat;
-
-function DropMenu(props) {
-  const { element, looks, close, submit } = props.styles;
-  const {
-    setShowMenu,
-    setUsertoId,
-    usersFiltered,
-    submitSelect,
-  } = props;
- 
-  return (
-    <>
-      <div className={`${element} ${looks}`}>
-        <div>
-          <label htmlFor="selection">choose an user</label>
-          <select
-            id="selection"
-            name="userTo"
-            onChange={(event) => setUsertoId(event.target.value)}
-          >
-            {usersFiltered.map((e) => (
-              <option key={e.id} value={e.id}>
-                {!e.profile
-                  ? `${e.username} | ${e.status}`
-                  : !e.profile.nametoshow
-                  ? `${e.username} | ${e.status}`
-                  : `${e.profile.nametoshow} | ${e.status}`}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <button
-            className={submit}
-            onClick={(event) => {
-              submitSelect(event, event.target.value);
-            }}
-          >
-            submit
-          </button>
-          <button
-            onClick={() => {
-              setShowMenu(false);
-            }}
-            className={close}
-          >
-            cancel
-          </button>
-        </div>
-      </div>
-    </>
-  );
-}

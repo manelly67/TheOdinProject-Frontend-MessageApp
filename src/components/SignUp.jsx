@@ -4,7 +4,7 @@ import ToggleTheme from "./ToggleTheme";
 import { ErrorMessage } from "./Error_message";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Form.module.css";
-import { resGETsignup } from "../assets/mock_data";
+
 
 const titleDiv = document.querySelector("title");
 const url = urlAddresses.sign_up;
@@ -18,8 +18,6 @@ const SingUp = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const { formSection } = styles;
-
-  console.log(user);
 
   if (titleDiv) {
     titleDiv.textContent = "SIGN UP";

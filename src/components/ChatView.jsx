@@ -20,7 +20,7 @@ const ChatView = (props) => {
     getAllChats,
     getListOfUsers,
   } = props;
-  let profile = !userDetails['profile'] ? null : userDetails.profile;
+  let profile = !userDetails ? null : (!userDetails['profile'] ? null : userDetails.profile);
  
   const chats = allChats;
   const [selectedChat, setSelectedChat] = useState(null);

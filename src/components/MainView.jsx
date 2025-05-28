@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ToggleTheme from "./ToggleTheme";
 import Navbar from "./Navbar";
 import ChatView from "./ChatView";
@@ -40,6 +40,7 @@ const MainView = () => {
 
   console.log(`token=${token} user=${userDetails} userId=${userId}`);
   console.log(allChats);
+  console.log(allUsers);
 
   const getAllChats = useCallback(async () => {
     try {
