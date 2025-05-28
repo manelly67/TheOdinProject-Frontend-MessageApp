@@ -15,7 +15,7 @@ const { usersInChats, setSelectedChat, setUserTo } = props;
                 setSelectedChat(e.chatId);
                 setUserTo(e.userId);
               }}
-              aria-label={`active chat user ${e.userProfile.nametoshow}`}
+              aria-label={`active chat user ${e.username}`}
             >
               {!e.userProfile ? (
                 <img
@@ -36,11 +36,15 @@ const { usersInChats, setSelectedChat, setUserTo } = props;
           </div>
           <div>
             {e.userProfile === null ? (
+              <>
               <p>no name</p>
+              <p>{e.status}</p>
+              </>
+              
             ) : (
               <>
                 <p>{e.userProfile.nametoshow}</p>
-                <p>{e.userProfile.status}</p>
+                <p>{e.status}</p>
               </>
             )}
             <button className={buttonViewProfile}>profile</button>

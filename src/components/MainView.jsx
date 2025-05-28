@@ -58,6 +58,9 @@ const MainView = () => {
         setAllChats(temp.chats);
         setUserId(temp.user);
       }
+      if(temp.err){
+        setMessage(temp.err.message);
+      }
     } catch (error) {
       alert("Something was wrong. try again later");
       console.log(error);
@@ -78,6 +81,9 @@ const MainView = () => {
       console.log(temp);
       if (temp.list_of_users) {
         setAllUsers(temp.list_of_users);
+      }
+      if(temp.err){
+        setMessage(temp.err.message);
       }
     } catch (error) {
       alert("Something was wrong. try again later");

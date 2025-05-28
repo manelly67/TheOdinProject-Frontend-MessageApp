@@ -44,6 +44,7 @@ const ChatView = (props) => {
               let obj = {
                 chatId: e.id,
                 userId: user,
+                status: filtered[0].status,
                 userProfile: filtered[0].profile,
               };
               array.push(obj);

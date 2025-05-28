@@ -72,7 +72,7 @@ function LateralNavbar(props) {
             <Link to="/login_as_guest" state={{ token: props.token }}>Guest Mode</Link>
           </>
         ) : (
-          <Link to="/logout">Logout</Link>
+          <Link to="/logout" state={{ token: props.token }}>Logout</Link>
         )}
 
         <button className="lateralButton"
