@@ -1,0 +1,75 @@
+.light {
+    --color-bg-first: #f5f8fa;
+    --color-base-text: #31485b;
+  }
+  
+.dark {
+    --color-bg-first: #2c3e4e;
+    --color-base-text: #f5f8fa;
+  }
+
+/*  el comportamiento de centrar es una combinacion de las variables no omitir ninguna */
+
+.element { 
+    z-index: 1;
+    position: fixed;
+    inset: 0px;
+    width: 250px;
+    height: fit-content;
+    max-width: 100vw;
+    max-height: 100dvh;
+    margin:auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+}
+
+.looks {
+    padding: 3rem;
+    background-color: var(--color-bg-first);
+    color: var(--color-base-text);
+}
+
+@media (max-width: 430px) {
+  .looks > p {
+    font-size: 1rem;
+  }
+  .profile > p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 431px) {
+  .looks > p{
+   font-size: 1.2rem;
+  }
+  .profile > p {
+    font-size: 1.2rem;
+  }
+}
+
+.close {
+    padding: 0px;
+    margin: 0px;
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    color: #d0dde7;
+}
+
+.profile {
+    padding: 25px;
+    width: 245;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 105px;
+    gap: 10px;
+}
+
+.profile > p {
+    align-items: center;
+    align-content: center;
+}

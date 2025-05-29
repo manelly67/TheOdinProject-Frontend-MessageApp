@@ -5,6 +5,7 @@ import MessagesInChat from "./MessagesInChat";
 import NewMessage from "./NewMessage";
 import NewChat from "./NewChat";
 import ListActiveChats from "./ListActiveChats";
+import { usersInChatMock} from "../assets/mock_data";
 
 const ChatView = (props) => {
   const bgcolor = "white";
@@ -26,7 +27,7 @@ const ChatView = (props) => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [userTo, setUserTo] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [usersInChats, setUsersInChats] = useState([]);
+  const [usersInChats, setUsersInChats] = useState([]); 
 
   const getObjUsers = useCallback(
     (chats, userId) => {
@@ -84,7 +85,7 @@ const ChatView = (props) => {
 
   useEffect(() => {
     return getObjUsers(chats, userId);
-  }, [getObjUsers, chats, userId]);
+  }, [getObjUsers, chats, userId]); 
 
   useEffect(() => {
     return getMessages(selectedChat);
