@@ -96,7 +96,7 @@ const ChatView = (props) => {
       <div style={{ gridColumn: "1/5", gridRow: "1/2" }}></div>
 
       <section className={grid}>
-        <MainUser userDetails={userDetails} />
+        <MainUser userDetails={userDetails} userId={userId} token={token} />
         <div
           style={{
             gridColumn: "4/5",

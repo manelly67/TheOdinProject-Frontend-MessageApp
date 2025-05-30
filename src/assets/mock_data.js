@@ -1,5 +1,3 @@
-const passwordRequirements =
-  "Password must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 or more characters";
 
 const userDetails = {
   id: "f2262c52-9d76-4c29-a076-527b112bc69b",
@@ -321,6 +319,76 @@ const usersInChatMock = [
   },
 ];
 
+const mock_options_profile = {
+  available_colors: [
+    { id: 'color_1', name: 'black', colorcode: '#000000' },
+    { id: 'color_10', name: 'yellow', colorcode: '#ffff00' },
+    { id: 'color_11', name: 'red', colorcode: '#ff0000' },
+    { id: 'color_12', name: 'gray', colorcode: '#808080' },
+    { id: 'color_13', name: 'khaki', colorcode: '#f0e68c' },
+    { id: 'color_14', name: 'pink', colorcode: '#ffc0cb' },
+    { id: 'color_15', name: 'brown', colorcode: '#a52a2a' },
+    { id: 'color_2', name: 'white', colorcode: '#ffffff' },
+    { id: 'color_3', name: 'darkblue', colorcode: '#00008b' },
+    { id: 'color_4', name: 'lightskyblue', colorcode: '#87cefa' },
+    { id: 'color_5', name: 'darkolivegreen', colorcode: '#556b2f' },
+    { id: 'color_6', name: 'lightgreen', colorcode: '#90ee90' },
+    { id: 'color_7', name: 'darkmagenta', colorcode: '#8b008b' },
+    { id: 'color_8', name: 'lightcoral', colorcode: '#f08080' },
+    { id: 'color_9', name: 'darkorange', colorcode: '#ff8c00' }
+  ],
+  available_avatars: [
+    {
+      id: 'avatar_1',
+      name: 'yellow_girl',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746485662/yellow_girl_s7wfjx.jpg'
+    },
+    {
+      id: 'avatar_2',
+      name: 'cream_boy',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746485568/cream_boy_rvzo8h.jpg'
+    },
+    {
+      id: 'avatar_3',
+      name: 'red_girl',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746485617/red_girl_nptofu.jpg'
+    },
+    {
+      id: 'avatar_4',
+      name: 'blue_boy',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746485474/blue_boy_yujnch.jpg'
+    },
+    {
+      id: 'avatar_5',
+      name: 'avatar_cat',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746484939/avatar_cat_czsyjo.jpg'
+    },
+    {
+      id: 'avatar_6',
+      name: 'avatar_dog',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746486201/avatar_dog_lrpbiz.jpg'
+    },
+    {
+      id: 'avatar_7',
+      name: 'avatar_penguin',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746488058/avatar_penguin_baried.jpg'
+    },
+    {
+      id: 'avatar_8',
+      name: 'avatar_bird',
+      src_image: 'https://res.cloudinary.com/dwlqplcgt/image/upload/v1746486795/avatar_bird_if4ycv.jpg'
+    }
+  ]
+}
+
+/**
+ *  user_profile: user_profile,
+    profile_options: profile_options,
+
+    const { nametoshow, aboutme, avatarId, bgcolorId, textcolorId } =
+            req.body;
+ */
+
 export {
   usersInChatMock,
   userDetails,
@@ -328,4 +396,5 @@ export {
   messageCreated,
   resFetchAllChatsActiveUser,
   restFetchAllUsers,
+  mock_options_profile,
 };
