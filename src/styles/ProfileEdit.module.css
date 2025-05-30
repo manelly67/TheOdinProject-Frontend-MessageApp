@@ -15,7 +15,7 @@
     position: fixed;
     inset: 0px;
     width: fit-content;
-    height: fit-content;
+    height: fit-content; 
     max-width: 100vw;
     max-height: 100dvh;
     margin:auto;
@@ -30,8 +30,9 @@
 @media (max-width: 430px) {
 
     .element{
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 200px;
+        grid-template-rows: 250px 250px;
         gap: 3px;
         align-items: center;
     }
@@ -45,24 +46,25 @@
 }
 
 @media (min-width: 431px) {
-.element{
-    display: flex;
-    flex-direction: row;
-    gap: 3px;
-    align-items: center;
-}
+    .element{
+        display: grid;
+        grid-template-columns: 200px 200px;
+        grid-template-rows: 200px;
+        gap: 3px;
+        align-items: center;
+    }
 
   .looks > p{
-   font-size: 1.2rem;
+   font-size: 0.8rem;
   }
   .profile > p {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
 }
 
 .close {
     padding: 0px;
-    margin: 0px;
+    margin-left: 4px;
     width: 80px;
     height: 20px;
     font-size: 12px;
@@ -74,9 +76,9 @@
     width: 200px;
     height: 200px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 105px;
-    gap: 10px;
+    grid-template-columns: 0.7fr 1.3fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
 }
 
 .profile > p {
@@ -95,11 +97,11 @@
 }
 
 .options > section {
-    width: 98%;
-    height: 98%;
+    width: 100px;
+    height: 100px;
     overflow-y: scroll;
     overflow-x: scroll;
-    display: flexbox;
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 }

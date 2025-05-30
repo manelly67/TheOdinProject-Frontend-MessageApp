@@ -1,5 +1,5 @@
 
-const userDetails = {
+const userDetailsMock = {
   id: "f2262c52-9d76-4c29-a076-527b112bc69b",
   email: "primer@usuario.com",
   username: "primerusuario",
@@ -16,7 +16,7 @@ const userDetails = {
       colorcode: "#ffffff",
     },
     textcolor: {
-      colorcode: "#00008b",
+      colorcode: "#2c3e4e",
     },
     aboutme:
       "Donec bibendum ornare dignissim. Donec bibendum ornare dignissim. Fusce scelerisque in quam. Fusce scelerisque in quam. Donec bibendum ornare dignissim. Fusce scelerisque in quam",
@@ -391,7 +391,7 @@ const mock_options_profile = {
 
 export {
   usersInChatMock,
-  userDetails,
+  userDetailsMock,
   allChats,
   messageCreated,
   resFetchAllChatsActiveUser,

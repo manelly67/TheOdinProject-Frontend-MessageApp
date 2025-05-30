@@ -2,13 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 import styles from "../styles/ProfileEdit.module.css";
 import { urlAddresses } from "../assets/urlAddresses";
 import OptionsForProfile from "./OptionsForProfile";
+import { userDetailsMock, mock_options_profile } from "../assets/mock_data";
 
 const ProfileEdit = (props) => {
   const url = `${urlAddresses.profiles}`;
   const { element, looks, close, profile, options } = styles;
   const { setShowProfile, userId, token } = props;
-  const [profileToEdit, setProfileToEdit] = useState(null);
-  const [optionsForEdit, setOptionsForEdit] = useState(null);
+  /* const [profileToEdit, setProfileToEdit] = useState(null);
+  const [optionsForEdit, setOptionsForEdit] = useState(null); */
+
+  const profileToEdit = userDetailsMock.profile;
+  const optionsForEdit = mock_options_profile;
+
   const [textcolorId, setTextcolorId] = useState(null);
   const [bgcolorId, setBgcolorId] = useState(null);
   const [avatarId, setAvatarId] = useState(null);
@@ -35,9 +40,9 @@ const ProfileEdit = (props) => {
   const [textColor, setTextColor] = useState(
     !profileToEdit
       ? "#31485b"
-      : !profileToEdit.bgcolor
+      : !profileToEdit.textcolor
       ? "#31485b"
-      : profileToEdit.bgcolor.colorcode
+      : profileToEdit.textcolor.colorcode
   );
 
   function handleSubmit(event) {
@@ -66,7 +71,7 @@ const ProfileEdit = (props) => {
     console.log("funcion update profile");
   }
 
-  const getOptions = useCallback(async () => {
+  /*  const getOptions = useCallback(async () => {
     try {
       const response = await fetch(`${url}/${userId}`, {
         method: "GET",
@@ -89,18 +94,18 @@ const ProfileEdit = (props) => {
       console.log(error);
     }
   }, [token, url, userId]);
-
-  useEffect(() => {
+ */
+  /* useEffect(() => {
     if (userId !== null) {
       getOptions();
     }
   }, [getOptions, userId]);
-
+ */
 
   return (
     <>
       <section className={`${element} ${looks}`}>
-        <div className={profile}>
+        <div style={{ gridColumn: "1/2", gridRow: "1/2" }}>
           <div
             className={profile}
             style={{
@@ -111,7 +116,15 @@ const ProfileEdit = (props) => {
             {!aboutme ? (
               <p></p>
             ) : (
-              <p style={{ gridColumn: "1/3", gridRow: "1/2" }}>
+              <p
+                style={{
+                  gridColumn: "1/3",
+                  gridRow: "1/2",
+                  overflowY: "scroll",
+                  zIndex: "1",
+                  width: "95%",
+                }}
+              >
                 {profileToEdit.aboutme}
               </p>
             )}
