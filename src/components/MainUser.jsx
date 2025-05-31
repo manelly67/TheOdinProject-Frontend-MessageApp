@@ -6,10 +6,11 @@ import ProfileEdit from "./ProfileEdit";
 const MainUser = (props) => {
   const bgcolor = "white";
   const txtcolor = "black";
-  const { userDetails, userId, token } = props;
+  const { userDetails, userId, token, getAllChats, getListOfUsers } = props;
   const { profile } = userDetails;
   const { buttonEditProfile } = styles;
   const [showProfile, setShowProfile] = useState(false);
+
 
   return (
     <>
@@ -90,6 +91,8 @@ const MainUser = (props) => {
           setShowProfile={setShowProfile}
           userId={userId}
           token={token}
+          getAllChats={getAllChats}
+          getListOfUsers={getListOfUsers}
         />
       )}
     </>

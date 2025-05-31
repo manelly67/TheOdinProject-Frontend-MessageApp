@@ -3,9 +3,8 @@ import styles from "../styles/ProfileEdit.module.css";
 import { mock_options_profile } from "../assets/mock_data";
 
 const OptionsForProfile = (props) => {
-  const { close, done, divAvatars } = styles;
+  const { done } = styles;
   const {
-    userId,
     optionsForEdit,
     aboutme,
     setAboutme,

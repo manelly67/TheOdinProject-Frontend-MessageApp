@@ -5,7 +5,7 @@ import MessagesInChat from "./MessagesInChat";
 import NewMessage from "./NewMessage";
 import NewChat from "./NewChat";
 import ListActiveChats from "./ListActiveChats";
-import { usersInChatMock} from "../assets/mock_data";
+import { usersInChatMock } from "../assets/mock_data";
 
 const ChatView = (props) => {
   const bgcolor = "white";
@@ -21,13 +21,17 @@ const ChatView = (props) => {
     getAllChats,
     getListOfUsers,
   } = props;
-  let profile = !userDetails ? null : (!userDetails['profile'] ? null : userDetails.profile);
- 
+  let profile = !userDetails
+    ? null
+    : !userDetails["profile"]
+    ? null
+    : userDetails.profile;
+
   const chats = allChats;
   const [selectedChat, setSelectedChat] = useState(null);
   const [userTo, setUserTo] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [usersInChats, setUsersInChats] = useState([]); 
+  const [usersInChats, setUsersInChats] = useState([]);
 
   const getObjUsers = useCallback(
     (chats, userId) => {
@@ -85,7 +89,7 @@ const ChatView = (props) => {
 
   useEffect(() => {
     return getObjUsers(chats, userId);
-  }, [getObjUsers, chats, userId]); 
+  }, [getObjUsers, chats, userId]);
 
   useEffect(() => {
     return getMessages(selectedChat);
@@ -96,7 +100,13 @@ const ChatView = (props) => {
       <div style={{ gridColumn: "1/5", gridRow: "1/2" }}></div>
 
       <section className={grid}>
-        <MainUser userDetails={userDetails} userId={userId} token={token} />
+        <MainUser
+          userDetails={userDetails}
+          userId={userId}
+          token={token}
+          getAllChats={getAllChats}
+          getListOfUsers={getListOfUsers}
+        />
         <div
           style={{
             gridColumn: "4/5",

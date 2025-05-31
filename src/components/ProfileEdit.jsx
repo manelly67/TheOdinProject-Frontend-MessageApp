@@ -2,18 +2,20 @@ import { useState, useEffect, useCallback } from "react";
 import styles from "../styles/ProfileEdit.module.css";
 import { urlAddresses } from "../assets/urlAddresses";
 import OptionsForProfile from "./OptionsForProfile";
+import { ErrorMessage } from "./Error_message";
 import { userDetailsMock, mock_options_profile } from "../assets/mock_data";
 
 const ProfileEdit = (props) => {
   const url = `${urlAddresses.profiles}`;
   const { element, looks, close, profile, options } = styles;
-  const { setShowProfile, userId, token } = props;
-  /* const [profileToEdit, setProfileToEdit] = useState(null);
-  const [optionsForEdit, setOptionsForEdit] = useState(null); */
-
+  const { setShowProfile, userId, token, getAllChats, getListOfUsers } = props;
+  const [profileToEdit, setProfileToEdit] = useState(null);
+  const [optionsForEdit, setOptionsForEdit] = useState(null);
+/* 
   const profileToEdit = userDetailsMock.profile;
-  const optionsForEdit = mock_options_profile;
+  const optionsForEdit = mock_options_profile; */
 
+  const [errArray, setErrArray] = useState(null);
   const [textcolorId, setTextcolorId] = useState(null);
   const [bgcolorId, setBgcolorId] = useState(null);
   const [avatarId, setAvatarId] = useState(null);
@@ -47,33 +49,8 @@ const ProfileEdit = (props) => {
 
 console.log(avatar);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(userId);
-    console.log(aboutme);
-    console.log(nametoshow);
-    console.log(avatarId);
-    console.log(bgcolorId);
-    console.log(textcolorId);
-    switch (profileToEdit === null) {
-      case true:
-        createProfile(event);
-        break;
-      case false:
-        updateProfile(event);
-        break;
-    }
-  }
-
-  async function createProfile(event) {
-    console.log("funcion create profile");
-  }
-
-  async function updateProfile(event) {
-    console.log("funcion update profile");
-  }
-
-  /*  const getOptions = useCallback(async () => {
+  // get initial options with useEffect
+  const getOptions = useCallback(async () => {
     try {
       const response = await fetch(`${url}/${userId}`, {
         method: "GET",
@@ -96,16 +73,119 @@ console.log(avatar);
       console.log(error);
     }
   }, [token, url, userId]);
- */
-  /* useEffect(() => {
+
+ useEffect(() => {
     if (userId !== null) {
       getOptions();
     }
   }, [getOptions, userId]);
- */
+ 
+// handle submit for create or update profile
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(userId);
+    console.log(aboutme);
+    console.log(nametoshow);
+    console.log(avatarId);
+    console.log(bgcolorId);
+    console.log(textcolorId);
+    switch (profileToEdit === null) {
+      case true:
+        createProfile(event);
+        break;
+      case false:
+        updateProfile(event);
+        break;
+    }
+  }
+
+  async function createProfile(event) {
+    console.log("funcion create profile");
+    event.preventDefault();
+    const bodydata = {
+      aboutme,
+      nametoshow,
+      avatarId,
+      bgcolorId,
+      textcolorId,
+    };
+    fetch(`${url}/${userId}`, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(bodydata),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message) {
+          alert(data.message);
+        }
+        if (data.errors){
+          setErrArray(data.errors);
+        }
+        if (data.err){
+          alert(data.err.message);
+        }
+        if (data.user_profile) {
+          setErrArray(null);
+          getListOfUsers();
+          getAllChats();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  async function updateProfile(event) {
+    console.log("funcion update profile");
+    event.preventDefault();
+    const bodydata = {
+      aboutme,
+      nametoshow,
+      avatarId,
+      bgcolorId,
+      textcolorId,
+    };
+    fetch(`${url}/${userId}`, {
+      method: "PUT",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(bodydata),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message) {
+          alert(data.message);
+        }
+        if (data.errors){
+          setErrArray(data.errors);
+        }
+        if (data.err){
+          alert(data.err.message);
+        }
+        if (data.user_profile) {
+          setErrArray(null);
+          getListOfUsers();
+          getAllChats();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <>
+    
       <section className={`${element} ${looks}`}>
         <div style={{ gridColumn: "1/2", gridRow: "1/2" }}>
           <div
@@ -159,10 +239,10 @@ console.log(avatar);
           <button className={close} onClick={(event) => handleSubmit(event)}>
             save changes
           </button>
+          <ErrorMessage errors={errArray} />
         </div>
         <div className={options}>
           <OptionsForProfile
-            userId={userId}
             optionsForEdit={optionsForEdit}
             aboutme={aboutme}
             setAboutme={setAboutme}

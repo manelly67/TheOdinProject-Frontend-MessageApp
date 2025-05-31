@@ -211,3 +211,7 @@ nav {
 .lateral > a {
   padding-left: 10px;
 }
+
+.error {
+  color:darkred;
+}
