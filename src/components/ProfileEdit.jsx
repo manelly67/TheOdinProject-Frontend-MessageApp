@@ -80,7 +80,7 @@ const ProfileEdit = (props) => {
         }
       }
       if(!temp.user_profile){
-        setAvatarId("avatar_1");
+        setAvatarId("no_avatar");
         setBgcolorId("color_2");
         setTextcolorId("color_1");
       }
