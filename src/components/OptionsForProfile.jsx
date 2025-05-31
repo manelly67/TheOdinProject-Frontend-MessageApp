@@ -18,6 +18,8 @@ const OptionsForProfile = (props) => {
     setTextcolorId,
   } = props;
 
+  console.log(aboutme);
+
   const [showTextColors, setShowTextColors] = useState(false);
   const [showBgColors, setShowBgColors] = useState(false);
   const [showAvatars, setShowAvatars] = useState(false);

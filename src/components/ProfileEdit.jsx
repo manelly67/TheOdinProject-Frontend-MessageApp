@@ -11,19 +11,19 @@ const ProfileEdit = (props) => {
   const { setShowProfile, userId, token, getAllChats, getListOfUsers } = props;
   const [profileToEdit, setProfileToEdit] = useState(null);
   const [optionsForEdit, setOptionsForEdit] = useState(null);
-/* 
+  /* 
   const profileToEdit = userDetailsMock.profile;
   const optionsForEdit = mock_options_profile; */
-
+  console.log(profileToEdit);
   const [errArray, setErrArray] = useState(null);
   const [textcolorId, setTextcolorId] = useState(null);
   const [bgcolorId, setBgcolorId] = useState(null);
   const [avatarId, setAvatarId] = useState(null);
   const [aboutme, setAboutme] = useState(
-    !profileToEdit ? null : profileToEdit.aboutme
+    !profileToEdit ? "" : profileToEdit.aboutme
   );
   const [nametoshow, setNametoshow] = useState(
-    !profileToEdit ? null : profileToEdit.nametoshow
+    !profileToEdit ? "" : profileToEdit.nametoshow
   );
   const [avatar, setAvatar] = useState(
     !profileToEdit
@@ -34,23 +34,24 @@ const ProfileEdit = (props) => {
   );
   const [backgroundColor, setBackgroundColor] = useState(
     !profileToEdit
-      ? "#f5f8fa"
+      ? "#ffffff"
       : !profileToEdit.bgcolor
-      ? "#f5f8fa"
+      ? "#ffffff"
       : profileToEdit.bgcolor.colorcode
   );
   const [textColor, setTextColor] = useState(
     !profileToEdit
-      ? "#31485b"
+      ? "#000000"
       : !profileToEdit.textcolor
-      ? "#31485b"
+      ? "#000000"
       : profileToEdit.textcolor.colorcode
   );
 
-console.log(avatar);
+  console.log(avatar, nametoshow, aboutme);
 
   // get initial options with useEffect
   const getOptions = useCallback(async () => {
+    console.log("get options");
     try {
       const response = await fetch(`${url}/${userId}`, {
         method: "GET",
@@ -61,9 +62,27 @@ console.log(avatar);
         },
       });
       const temp = await response.json();
+      console.log(temp);
       if (temp.profile_options) {
         setOptionsForEdit(temp.profile_options);
+      }
+      if (temp.user_profile) {
         setProfileToEdit(temp.user_profile);
+        if (temp.user_profile.avatar) {
+          setAvatar(temp.user_profile.avatar.src_image);
+          setAvatarId(temp.user_profile.avatar.id);
+        }
+        if (temp.user_profile.nametoshow) {
+          setNametoshow(temp.user_profile.nametoshow);
+        }
+        if (temp.user_profile.aboutme) {
+          setAboutme(temp.user_profile.aboutme);
+        }
+      }
+      if(!temp.user_profile){
+        setAvatarId("avatar_1");
+        setBgcolorId("color_2");
+        setTextcolorId("color_1");
       }
       if (temp.err) {
         alert(temp.err.message);
@@ -74,15 +93,16 @@ console.log(avatar);
     }
   }, [token, url, userId]);
 
- useEffect(() => {
+  useEffect(() => {
     if (userId !== null) {
       getOptions();
     }
   }, [getOptions, userId]);
- 
-// handle submit for create or update profile
+
+  // handle submit for create or update profile
   function handleSubmit(event) {
     event.preventDefault();
+   
     console.log(userId);
     console.log(aboutme);
     console.log(nametoshow);
@@ -124,16 +144,17 @@ console.log(avatar);
         if (data.message) {
           alert(data.message);
         }
-        if (data.errors){
+        if (data.errors) {
           setErrArray(data.errors);
         }
-        if (data.err){
+        if (data.err) {
           alert(data.err.message);
         }
         if (data.user_profile) {
           setErrArray(null);
           getListOfUsers();
           getAllChats();
+          setShowProfile(false);
         }
       })
       .catch((err) => {
@@ -166,16 +187,17 @@ console.log(avatar);
         if (data.message) {
           alert(data.message);
         }
-        if (data.errors){
+        if (data.errors) {
           setErrArray(data.errors);
         }
-        if (data.err){
+        if (data.err) {
           alert(data.err.message);
         }
         if (data.user_profile) {
           setErrArray(null);
           getListOfUsers();
           getAllChats();
+          setShowProfile(false);
         }
       })
       .catch((err) => {
@@ -185,7 +207,6 @@ console.log(avatar);
 
   return (
     <>
-    
       <section className={`${element} ${looks}`}>
         <div style={{ gridColumn: "1/2", gridRow: "1/2" }}>
           <div
@@ -239,7 +260,7 @@ console.log(avatar);
           <button className={close} onClick={(event) => handleSubmit(event)}>
             save changes
           </button>
-          <ErrorMessage errors={errArray} />
+          {!errArray ? null : <ErrorMessage errors={errArray} />}
         </div>
         <div className={options}>
           <OptionsForProfile
