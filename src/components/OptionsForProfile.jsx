@@ -3,11 +3,13 @@ import styles from "../styles/ProfileEdit.module.css";
 import { mock_options_profile } from "../assets/mock_data";
 
 const OptionsForProfile = (props) => {
-  const { close } = styles;
+  const { close, done, divAvatars } = styles;
   const {
     userId,
     optionsForEdit,
+    aboutme,
     setAboutme,
+    nametoshow,
     setNametoshow,
     setAvatar,
     setAvatarId,
@@ -24,66 +26,86 @@ const OptionsForProfile = (props) => {
   const listColorsForText = !optionsForEdit
     ? null
     : optionsForEdit.available_colors.map((e) => (
-        <button
-          key={e.id}
-          style={{
-            width: "5px",
-            height: "5px",
-            padding: "0px",
-            margin: "0px",
-            backgroundColor: `${e.colorcode}`,
-          }}
-          onClick={() => {
-            setTextColor(e.colorcode);
-            setTextcolorId(e.id);
-          }}
-          aria-label={`color ${e.name}`}
-        ></button>
+        <div key={`${e.id}_div`}>
+          <button
+            key={e.id}
+            style={{
+              backgroundColor: `${e.colorcode}`,
+            }}
+            onClick={() => {
+              setTextColor(e.colorcode);
+              setTextcolorId(e.id);
+            }}
+            aria-label={`color ${e.name}`}
+          ></button>
+        </div>
       ));
 
   const listColorsForBg = !optionsForEdit
     ? null
     : optionsForEdit.available_colors.map((e) => (
-        <button
-          key={e.id}
-          style={{
-            width: "5px",
-            height: "5px",
-            padding: "0px",
-            margin: "0px",
-            backgroundColor: `${e.colorcode}`,
-          }}
-          onClick={() => {
-            setBackgroundColor(e.colorcode);
-            setBgcolorId(e.id);
-          }}
-          aria-label={`color ${e.name}`}
-        ></button>
+        <div key={`${e.id}_div`}>
+          <button
+            key={e.id}
+            style={{
+              backgroundColor: `${e.colorcode}`,
+            }}
+            onClick={() => {
+              setBackgroundColor(e.colorcode);
+              setBgcolorId(e.id);
+            }}
+            aria-label={`color ${e.name}`}
+          ></button>
+        </div>
       ));
 
   const listAvatars = !optionsForEdit
     ? null
     : optionsForEdit.available_avatars.map((e) => (
-        <button
-          key={e.id}
-          style={{
-            width: "15px",
-            height: "15px",
-            padding: "0px",
-            margin: "0px",
-          }}
-          onClick={() => {
-            setAvatar(e.src_image);
-            setAvatarId(e.id);
-          }}
-          aria-label={`avatar ${e.name}`}
-        ></button>
+        <div key={`${e.id}_div`} style={{ width: "35px", height: "35px" }}>
+          <button
+            key={e.id}
+            onClick={() => {
+              setAvatar(e.src_image);
+              setAvatarId(e.id);
+            }}
+            aria-label={`avatar ${e.name}`}
+          >
+            <img
+              src={e.src_image}
+              alt="avatar"
+              width="30px"
+              height="30px"
+            ></img>
+          </button>
+        </div>
       ));
 
   return (
     <>
-      <input style={{ gridRow: "1/2", gridColumn: "1/2" }} />
-      <textarea style={{ gridRow: "1/2", gridColumn: "2/4" }}></textarea>
+      <div style={{ gridRow: "1/2", gridColumn: "1/4" }}>
+        <div>
+          <label htmlFor="nametoshow">name to show</label>
+          <input
+            id="nametoshow"
+            type="text"
+            name="nametoshow"
+            value={nametoshow}
+            onChange={(event) => setNametoshow(event.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="aboutme">about me</label>
+          <textarea
+            id="aboutme"
+            type="text"
+            name="aboutme"
+            value={aboutme}
+            onChange={(event) => setAboutme(event.target.value)}
+          ></textarea>
+        </div>
+      </div>
+
       <button
         style={{ gridRow: "2/3", gridColumn: "1/2" }}
         onClick={() => {
@@ -115,14 +137,16 @@ const OptionsForProfile = (props) => {
         change Avatar
       </button>
       <section style={{ gridRow: "2/5", gridColumn: "2/4" }}>
-        {!showBgColors ? null : listColorsForBg}
+        <div>
+          {!showBgColors ? null : listColorsForBg}
 
-        {!showTextColors ? null : listColorsForText}
+          {!showTextColors ? null : listColorsForText}
 
-        {!showAvatars ? null : listAvatars}
+          {!showAvatars ? null : listAvatars}
+        </div>
 
         <button
-          className={close}
+          className={done}
           onClick={() => {
             setShowBgColors(false);
             setShowTextColors(false);

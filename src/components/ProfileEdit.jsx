@@ -45,6 +45,8 @@ const ProfileEdit = (props) => {
       : profileToEdit.textcolor.colorcode
   );
 
+console.log(avatar);
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log(userId);
@@ -125,7 +127,7 @@ const ProfileEdit = (props) => {
                   width: "95%",
                 }}
               >
-                {profileToEdit.aboutme}
+                {aboutme}
               </p>
             )}
 
@@ -134,14 +136,14 @@ const ProfileEdit = (props) => {
             ) : (
               <p
                 style={{ gridColumn: "1/2", gridRow: "2/3" }}
-              >{`I am ${profileToEdit.nametoshow}`}</p>
+              >{`I am ${nametoshow}`}</p>
             )}
 
             {!avatar ? (
               <p>no avatar selected</p>
             ) : (
               <img
-                src={profileToEdit.avatar.src_image}
+                src={avatar}
                 alt="avatar"
                 width="100px"
                 height="100px"
@@ -162,7 +164,9 @@ const ProfileEdit = (props) => {
           <OptionsForProfile
             userId={userId}
             optionsForEdit={optionsForEdit}
+            aboutme={aboutme}
             setAboutme={setAboutme}
+            nametoshow={nametoshow}
             setNametoshow={setNametoshow}
             setAvatar={setAvatar}
             setAvatarId={setAvatarId}
