@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Imagen from "./Imagen";
+
 
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
@@ -80,8 +82,10 @@ function LateralNavbar(props) {
             props.setClasses("lateral animate-out");
             setTimeout(props.closeNav, 1300);
           }}
+          aria-label={"close"}
+          title="close"
         >
-          x
+          <Imagen/>
         </button>
       </nav>
     </>

@@ -1,19 +1,15 @@
-const Imagen = (props) => {
-  const { imgLargeMedium, imgSmall } = props;
+import imgSmall from "../assets/img/paloma_small.jpg";
 
+const Imagen = () => {
+ 
   return (
     <>
-      <picture style={{ width: "70%" }}>
-        <source srcSet={imgLargeMedium} media="(min-width: 621px)" />
-
-        <img
-          loading="lazy"
-          src={imgSmall}
-          alt="pigeon carrying a mail sack"
-          width="70%"
-          height="auto"
-        />
-      </picture>
+      <img
+        src={imgSmall}
+        alt="pigeon carrying a mail sack"
+        width="20px"
+        height="auto"
+      />
     </>
   );
 };

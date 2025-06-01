@@ -107,6 +107,9 @@ body {
     grid-template-columns: 60px 60px;
     gap: 3px;
   }
+  .phonebutton{
+    margin-top: 30%;
+  }
 }
 
 @media (min-width: 431px) {
@@ -120,25 +123,34 @@ body {
   gap: 20px;
   align-items: end;
 }
+.phonebutton{
+  margin-top: 5%;
 }
 
-.phonebutton {
-  width: 95%;
-  height: 95%;
-  border-radius: 8px;
-  padding: 0.9em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--color-bg-button);
-  border-color: var(--color-border-button);
-  cursor: pointer;
-  transition: border-color 0.25s;
-  transition: transform 250ms ease-in-out;
 }
+
+
+.phonebutton {
+  padding: 0;
+  border: 2px solid burlywood;
+  border-radius: 60px;
+  width: 105px;
+  height: 105px;
+  font-size: 3rem;
+  background-color: burlywood;
+  background: url("/src/assets/img/paloma_small.jpg");
+  background-size: 99% 99%;
+  align-content: center;
+  align-items: center;
+} 
+ 
 .phonebutton:hover {
   border-color: var(--color-border-button);
   transform: scale(1.02);
+}
+
+.phonebutton > img {
+  margin: 0 auto;
 }
 
 nav {

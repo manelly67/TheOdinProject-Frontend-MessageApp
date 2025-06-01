@@ -1,16 +1,16 @@
 /* define light dark colors*/
 
   .light {
-    --color-bg-first: #f5f8fa;
+    --color-bg-first: #d0dde7;
+   /*  --color-bg-first: #f5f8fa; */
     --color-base-text: #31485b;
     --color-base-text-2: #2c3e4e;
     --color-bg-button: #37556d;
-    --color-border-button: #31485b;
+    --color-border-button: #bdeafa;
     --color-text-a-link: #28c1ef;
     --color-bg-box:#d0dde7;
     --color-border-box:#e1f4fd;
     --color-text-box:#31485b;
-
   }
   
 .dark {
@@ -121,3 +121,5 @@
     font-size: 1.7em;
     line-height: 1;
   }
+
+  
