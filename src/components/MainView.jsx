@@ -17,13 +17,11 @@ const MainView = () => {
   }
 
   const [screenWidth, setScreenWidth] = useState(0);
-  const [wakeUp, setWakeUp] = useState(false); // RECORDAR REGRESAR A FALSE
+  const [wakeUp, setWakeUp] = useState(false); 
   const [message, setMessage] = useState(null);
-  /* const [allChats, setAllChats] = useState(resFetchAllChatsActiveUser.chats);  */ // RECORDAR REGRESAR A NULL
   const [allChats, setAllChats] = useState(null);
   const [userId, setUserId] = useState(null);
   const [allUsers, setAllUsers] = useState(null);
-  /* const [allUsers, setAllUsers] = useState(restFetchAllUsers.list_of_users);  */ // RECORDAR REGRESAR A NULL
   const { chatbox } = styles;
 
   const token =

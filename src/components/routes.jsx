@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import Logout from "./Logout";
 import LoginAsGuest from "./LoginAsGuest";
+import GuestView from "./GuestView";
 
 const routes = [
   {
@@ -29,13 +30,13 @@ const routes = [
     path: "logout",
     element: <Logout />,
   },
-  
   {
     path: "main_app",
     element: <MainView />,
-    children: [
-     
-    ],
+  },
+  {
+    path: "guest_view",
+    element: <GuestView />,
   },
 ];
 
