@@ -126,6 +126,17 @@
 
 /* Display messages in Chat style */
 
+.refreshButton{
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 1%;
+  right: 2%;
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+}
+
 .displayMessages {
   display: flex;
   flex-direction: column;
@@ -135,7 +146,7 @@
 }
 
 .displayMessages > ul {
-  padding-top: 6px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

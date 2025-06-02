@@ -153,10 +153,16 @@ const ChatView = (props) => {
           style={{
             gridColumn: "2/5",
             gridRow: "2/3",
+            position: "relative",
           }}
           className={displayMessages}
         >
-          <MessagesInChat messages={messages} userId={userId} />
+          <MessagesInChat
+            messages={messages}
+            userId={userId}
+            getAllChats={getAllChats}
+            getListOfUsers={getListOfUsers}
+          />
         </div>
         <div
           style={{
