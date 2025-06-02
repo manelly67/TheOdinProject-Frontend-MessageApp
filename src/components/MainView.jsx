@@ -108,11 +108,11 @@ const MainView = () => {
   }, [screenWidth]);
 
   useEffect(() => {
-    if (token !== null) {
+    if ( wakeUp===true && token !== null) {
       getListOfUsers();
       getAllChats();
     }
-  }, [token, getAllChats, getListOfUsers]);
+  }, [wakeUp, token, getAllChats, getListOfUsers]);
 
   useEffect(() => {
     callToServer();
