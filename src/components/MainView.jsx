@@ -59,6 +59,9 @@ const MainView = () => {
       if(temp.err){
         setMessage(temp.err.message);
       }
+      if(temp.message){
+        setMessage(temp.message);
+      }
     } catch (error) {
       alert("Something was wrong. try again later");
       console.log(error);
