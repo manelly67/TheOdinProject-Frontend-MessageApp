@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
 import { ErrorMessage } from "./Error_message";
@@ -9,7 +9,6 @@ import styles from "../styles/Form.module.css";
 
 const titleDiv = document.querySelector("title");
 const url = urlAddresses.login_as_guest;
-let didInit = false;
 
 const LoginAsGuest = () => {
   if (titleDiv) {
@@ -19,11 +18,12 @@ const LoginAsGuest = () => {
   const location = useLocation();
   const { token } = location.state !== null ? location.state : null;
   const [responseData, setResponseData] = useState("{}");
-  const { formSection } = styles;
+  const { formSection, loginAsGuestDiv } = styles;
 
   const [activeToken, setActiveToken] = useState(token);
 
-  const createGuest = useCallback(async () => {
+  const createGuest = useCallback(async (e) => {
+    e.preventDefault();
     fetch(`${url}`, {
       method: "POST",
       headers: {
@@ -47,13 +47,6 @@ const LoginAsGuest = () => {
       });
   },[]);
 
- 
-  useEffect(() => {
-    if (didInit === false) {
-      didInit = true;
-      createGuest();
-    }
-  }, [createGuest]);
 
   return (
     <>
@@ -62,7 +55,7 @@ const LoginAsGuest = () => {
           <div>
             <ToggleTheme theme="light" />
             <Link
-              to="/guest_view"
+              to="/main_app"
               style={{
                 width: "50px",
                 gridColumn: "1/2",
@@ -78,12 +71,27 @@ const LoginAsGuest = () => {
           <section className={formSection}>
             {activeToken === null ? (
               <>
-                <div style={{marginTop:"40px"}}>
-                  <p>you will be granted a token for 1 hour</p>
+                <div className={loginAsGuestDiv}>
+                  <p>as a guest:</p>
+                  <p>🗸 you will have a token for one day</p>
+                  <p>🗸 you will be able to see the chat model</p>
+                  <p>🗸 you will be able to see the profiles of the users of the chat model</p>
+                  <p>🗸 you can modify your own profile </p>
+                  <br></br>
+                  <p>✗ you will not be able to start a new chat or write messages</p>
                   {responseData.message ? <p>{responseData.message}</p> : null}
                   {responseData.errors === undefined ? null : (
                     <ErrorMessage errors={responseData.errors} />
                   )}
+                  <div>
+                    <button
+                      onClick={(e) => {
+                        createGuest(e);
+                      }}
+                    >
+                      I agree
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (

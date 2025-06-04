@@ -31,6 +31,10 @@
         grid-template-rows: 0.25fr 0.75fr;
     }
 
+    .loginAsGuestDiv {
+        max-width: 230px;
+    }
+
 }
 
 
@@ -56,6 +60,10 @@
     grid-template-columns: 0.25fr 0.75fr;
     grid-template-rows: 1fr 
     }
+
+    .loginAsGuestDiv {
+        max-width: 300px;
+    }
 }
 
 input {
@@ -80,4 +88,19 @@ input:valid, input:focus{
 
 button {
     width: 100px;
+}
+
+.loginAsGuestDiv {
+    margin-top: 50px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.loginAsGuestDiv > p {
+    align-self: flex-start;
+    text-align: justify;
 }
