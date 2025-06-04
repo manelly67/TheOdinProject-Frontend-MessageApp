@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
-import Error_message from "./Error_message";
+import { ErrorMessage } from "./Error_message";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Form.module.css";
 
@@ -78,11 +78,11 @@ const LoginAsGuest = () => {
           <section className={formSection}>
             {activeToken === null ? (
               <>
-                <div>
+                <div style={{marginTop:"40px"}}>
                   <p>you will be granted a token for 1 hour</p>
                   {responseData.message ? <p>{responseData.message}</p> : null}
                   {responseData.errors === undefined ? null : (
-                    <Error_message errors={responseData.errors} />
+                    <ErrorMessage errors={responseData.errors} />
                   )}
                 </div>
               </>
