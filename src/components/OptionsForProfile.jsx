@@ -138,7 +138,7 @@ const OptionsForProfile = (props) => {
         change Avatar
       </button>
       <section style={{ gridRow: "2/5", gridColumn: "2/4" }}>
-        <div>
+        <div style={{zIndex:"2"}}>
           {!showBgColors ? null : listColorsForBg}
 
           {!showTextColors ? null : listColorsForText}
