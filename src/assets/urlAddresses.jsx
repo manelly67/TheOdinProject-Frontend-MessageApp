@@ -17,6 +17,7 @@ const urlAddresses = {
   // limited content for the guest
   isguest: `${base}/isguest`,
   chat_model: `${base}/isguest/chat_model`,
+  available_users: `${base}/isguest/available_users`,
   allowed_profiles: `${base}/isguest/profile`, // need params /:user_id
 };
 
