@@ -3,7 +3,6 @@ import styles from "../styles/ProfileEdit.module.css";
 import { urlAddresses } from "../assets/urlAddresses";
 import OptionsForProfile from "./OptionsForProfile";
 import { ErrorMessage } from "./Error_message";
-import { userDetailsMock, mock_options_profile } from "../assets/mock_data";
 
 const ProfileEdit = (props) => {
   const url = `${urlAddresses.profiles}`; // for POST and PUT method same for roles USER or GUEST
@@ -20,10 +19,6 @@ const ProfileEdit = (props) => {
   } = props;
   const [profileToEdit, setProfileToEdit] = useState(null);
   const [optionsForEdit, setOptionsForEdit] = useState(null);
-  /* 
-  const profileToEdit = userDetailsMock.profile;
-  const optionsForEdit = mock_options_profile; */
-  console.log(profileToEdit);
   const [errArray, setErrArray] = useState(null);
   const [textcolorId, setTextcolorId] = useState(null);
   const [bgcolorId, setBgcolorId] = useState(null);
@@ -56,13 +51,9 @@ const ProfileEdit = (props) => {
       : profileToEdit.textcolor.colorcode
   );
 
-  console.log(avatar, nametoshow, aboutme);
-
   // get initial options with useEffect
   const getOptions = useCallback(
     async (url) => {
-      console.log("get options");
-      console.log(url);
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -73,7 +64,6 @@ const ProfileEdit = (props) => {
           },
         });
         const temp = await response.json();
-        console.log(temp);
         if (temp.profile_options) {
           setOptionsForEdit(temp.profile_options);
         }
@@ -103,13 +93,11 @@ const ProfileEdit = (props) => {
         console.log(error);
       }
     },
-    [token, userId]
+    [token]
   );
 
   useEffect(() => {
     if (userId !== null && userDetails !== null) {
-      console.log(userDetails);
-      console.log(userDetails.role);
       switch (userDetails.role === "USER") {
         case true:
           getOptions(`${url}/${userId}`);
@@ -124,13 +112,6 @@ const ProfileEdit = (props) => {
   // handle submit for create or update profile
   function handleSubmit(event) {
     event.preventDefault();
-
-    console.log(userId);
-    console.log(aboutme);
-    console.log(nametoshow);
-    console.log(avatarId);
-    console.log(bgcolorId);
-    console.log(textcolorId);
     switch (profileToEdit === null) {
       case true:
         createProfile(event);
@@ -142,7 +123,6 @@ const ProfileEdit = (props) => {
   }
 
   async function createProfile(event) {
-    console.log("funcion create profile");
     event.preventDefault();
     const bodydata = {
       aboutme,
@@ -162,7 +142,6 @@ const ProfileEdit = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.message) {
           alert(data.message);
         }
@@ -185,7 +164,6 @@ const ProfileEdit = (props) => {
   }
 
   async function updateProfile(event) {
-    console.log("funcion update profile");
     event.preventDefault();
     const bodydata = {
       aboutme,
@@ -205,7 +183,6 @@ const ProfileEdit = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.message) {
           alert(data.message);
         }

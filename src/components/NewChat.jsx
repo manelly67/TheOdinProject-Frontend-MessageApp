@@ -19,8 +19,6 @@ const NewChat = (props) => {
     ? []
     : allUsers.filter((e) => e.id !== userId);
 
-  console.log(usertoId);
- 
   async function submitSelect(event) {
     event.preventDefault();
     const bodydata = {
@@ -37,7 +35,6 @@ const NewChat = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.message) {
           alert(data.message);
         }

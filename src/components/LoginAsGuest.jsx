@@ -19,7 +19,6 @@ const LoginAsGuest = () => {
   const { token } = location.state !== null ? location.state : null;
   const [responseData, setResponseData] = useState("{}");
   const { formSection, loginAsGuestDiv } = styles;
-
   const [activeToken, setActiveToken] = useState(token);
 
   const createGuest = useCallback(async (e) => {
@@ -45,8 +44,7 @@ const LoginAsGuest = () => {
       .catch((err) => {
         console.log(err);
       });
-  },[]);
-
+  }, []);
 
   return (
     <>
@@ -75,10 +73,15 @@ const LoginAsGuest = () => {
                   <p>as a guest:</p>
                   <p>🗸 you will have a token for one day</p>
                   <p>🗸 you will be able to see the chat model</p>
-                  <p>🗸 you will be able to see the profiles of the users of the chat model</p>
+                  <p>
+                    🗸 you will be able to see the profiles of the users of the
+                    chat model
+                  </p>
                   <p>🗸 you can modify your own profile </p>
                   <br></br>
-                  <p>✗ you will not be able to start a new chat or write messages</p>
+                  <p>
+                    ✗ you will not be able to start a new chat or write messages
+                  </p>
                   {responseData.message ? <p>{responseData.message}</p> : null}
                   {responseData.errors === undefined ? null : (
                     <ErrorMessage errors={responseData.errors} />

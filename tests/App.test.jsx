@@ -13,7 +13,7 @@ describe("App Component", () => {
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText("ON", { exact: false })).toBeInTheDocument();
+    expect(screen.getByLabelText("ON", { exact: false })).toBeInTheDocument();
   });
 
   it("display error page", () => {

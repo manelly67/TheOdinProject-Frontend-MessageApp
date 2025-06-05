@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Imagen from "./Imagen";
 
-
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
   const [classes, setClasses] = useState("lateral animate-in");
   const { token } = props;
-  console.log(token);
+
   function closeNav() {
     setShow(false);
   }
@@ -40,10 +39,14 @@ const Navbar = (props) => {
               <Link to="/login" state={{ token: token }}>
                 Login
               </Link>
-              <Link to="/login_as_guest" state={{ token: token }}>Guest Mode</Link>
+              <Link to="/login_as_guest" state={{ token: token }}>
+                Guest Mode
+              </Link>
             </>
           ) : (
-            <Link to="/logout" state={{ token: token }}>Logout</Link>
+            <Link to="/logout" state={{ token: token }}>
+              Logout
+            </Link>
           )}
         </nav>
       )}
@@ -71,13 +74,18 @@ function LateralNavbar(props) {
             <Link to="/login" state={{ token: props.token }}>
               Login
             </Link>
-            <Link to="/login_as_guest" state={{ token: props.token }}>Guest Mode</Link>
+            <Link to="/login_as_guest" state={{ token: props.token }}>
+              Guest Mode
+            </Link>
           </>
         ) : (
-          <Link to="/logout" state={{ token: props.token }}>Logout</Link>
+          <Link to="/logout" state={{ token: props.token }}>
+            Logout
+          </Link>
         )}
 
-        <button className="lateralButton"
+        <button
+          className="lateralButton"
           onClick={() => {
             props.setClasses("lateral animate-out");
             setTimeout(props.closeNav, 1300);
@@ -85,7 +93,7 @@ function LateralNavbar(props) {
           aria-label={"close"}
           title="close"
         >
-          <Imagen/>
+          <Imagen />
         </button>
       </nav>
     </>

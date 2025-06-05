@@ -4,12 +4,7 @@ import Navbar from "./Navbar";
 import ChatView from "./ChatView";
 import { urlAddresses } from "../assets/urlAddresses";
 import styles from "../styles/Chat.module.css";
-/* import {
-  userDetails,
-  resFetchAllChatsActiveUser,
-  restFetchAllUsers,
-} from "../assets/mock_data";
- */
+
 const MainView = () => {
   const titleDiv = document.querySelector("title");
   if (titleDiv) {
@@ -17,7 +12,7 @@ const MainView = () => {
   }
 
   const [screenWidth, setScreenWidth] = useState(0);
-  const [wakeUp, setWakeUp] = useState(false); 
+  const [wakeUp, setWakeUp] = useState(false);
   const [message, setMessage] = useState(null);
   const [allChats, setAllChats] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -30,15 +25,9 @@ const MainView = () => {
       : null;
 
   const userDetails =
-    (userId === null || allUsers === null)
+    userId === null || allUsers === null
       ? null
       : allUsers.filter((e) => e.id === userId)[0];
-
-  console.log(userDetails);
-
-  console.log(`token=${token} user=${userDetails} userId=${userId}`);
-  console.log(allChats);
-  console.log(allUsers);
 
   const getAllChats = useCallback(async () => {
     try {
@@ -51,15 +40,14 @@ const MainView = () => {
         },
       });
       const temp = await response.json();
-      console.log(temp);
       if (temp.chats) {
         setAllChats(temp.chats);
         setUserId(temp.user);
       }
-      if(temp.err){
+      if (temp.err) {
         setMessage(temp.err.message);
       }
-      if(temp.message){
+      if (temp.message) {
         setMessage(temp.message);
       }
     } catch (error) {
@@ -79,11 +67,10 @@ const MainView = () => {
         },
       });
       const temp = await response.json();
-      console.log(temp);
       if (temp.list_of_users) {
         setAllUsers(temp.list_of_users);
       }
-      if(temp.err){
+      if (temp.err) {
         setMessage(temp.err.message);
       }
     } catch (error) {
@@ -111,7 +98,7 @@ const MainView = () => {
   }, [screenWidth]);
 
   useEffect(() => {
-    if ( wakeUp===true && token !== null) {
+    if (wakeUp === true && token !== null) {
       getListOfUsers();
       getAllChats();
     }

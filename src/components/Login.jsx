@@ -16,9 +16,8 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { formSection } = styles;
- 
-  const [activeToken, setActiveToken] = useState(token);
 
+  const [activeToken, setActiveToken] = useState(token);
 
   if (titleDiv) {
     titleDiv.textContent = "LOGIN";
@@ -128,10 +127,7 @@ const Login = () => {
                 </form>
               </>
             ) : (
-              <Navigate
-                to="/main_app"
-                replace={true}
-              />
+              <Navigate to="/main_app" replace={true} />
             )}
           </section>
         </section>

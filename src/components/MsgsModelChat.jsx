@@ -4,15 +4,19 @@ const MsgsModelChat = (props) => {
   const { messages, userTo, usersInChats } = props;
   const { dateTxt, txt, msgMe, msgOther, userImg } = styles;
 
-  console.log(messages);
-
   const [filtered] = usersInChats.filter((x) => {
     return x.userId === userTo;
   });
 
   return (
     <>
-      <img className={userImg} src={filtered.userProfile.avatar.src_image} alt="avatar" width="30px" height="30px"></img>
+      <img
+        className={userImg}
+        src={filtered.userProfile.avatar.src_image}
+        alt="avatar"
+        width="30px"
+        height="30px"
+      ></img>
 
       {messages.length === 0 ? null : (
         <>

@@ -36,8 +36,6 @@ const GuestChatView = (props) => {
   const [messages, setMessages] = useState([]);
   const [usersInChats, setUsersInChats] = useState([]);
 
-  console.log(selectedChat);
-
   const getObjUsers = useCallback(
     (chats) => {
       if (chats) {
@@ -88,8 +86,6 @@ const GuestChatView = (props) => {
     [chats]
   );
 
-  console.log(usersInChats);
-
   useEffect(() => {
     return getObjUsers(chats, userId);
   }, [getObjUsers, chats, userId]);
@@ -98,7 +94,6 @@ const GuestChatView = (props) => {
     return getMessages(selectedChat);
   }, [getMessages, selectedChat]);
 
-  
   function sendForbidden() {
     alert("You are in guest mode. This action is forbidden.");
   }

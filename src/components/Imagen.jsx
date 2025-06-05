@@ -1,4 +1,4 @@
-import imgSmall from "../assets/img/paloma_small.jpg";
+import imgSmall from "../assets/img/paloma-small.webp";
 
 const Imagen = () => {
  

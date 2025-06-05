@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "../styles/ProfileEdit.module.css";
-import { mock_options_profile } from "../assets/mock_data";
 
 const OptionsForProfile = (props) => {
   const { done } = styles;
@@ -17,8 +16,6 @@ const OptionsForProfile = (props) => {
     setTextColor,
     setTextcolorId,
   } = props;
-
-  console.log(aboutme);
 
   const [showTextColors, setShowTextColors] = useState(false);
   const [showBgColors, setShowBgColors] = useState(false);
@@ -138,7 +135,7 @@ const OptionsForProfile = (props) => {
         change Avatar
       </button>
       <section style={{ gridRow: "2/5", gridColumn: "2/4" }}>
-        <div style={{zIndex:"2"}}>
+        <div style={{ zIndex: "2" }}>
           {!showBgColors ? null : listColorsForBg}
 
           {!showTextColors ? null : listColorsForText}

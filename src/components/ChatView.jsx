@@ -5,7 +5,6 @@ import MessagesInChat from "./MessagesInChat";
 import NewMessage from "./NewMessage";
 import NewChat from "./NewChat";
 import ListActiveChats from "./ListActiveChats";
-import { usersInChatMock } from "../assets/mock_data";
 
 const ChatView = (props) => {
   const bgcolor = "white";
@@ -84,8 +83,6 @@ const ChatView = (props) => {
     },
     [chats]
   );
-
-  console.log(usersInChats);
 
   useEffect(() => {
     return getObjUsers(chats, userId);

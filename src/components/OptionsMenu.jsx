@@ -1,19 +1,10 @@
 import { useState } from "react";
 import no_avatar from "../assets/img/no_avatar.jpg";
-import { restFetchAllUsers } from "../assets/mock_data";
 
 const OptionsMenu = (props) => {
   const { element, looks, close, submit } = props.styles;
-  const {
-    setShowMenu,
-    usertoId,
-    setUsertoId,
-    usersFiltered,
-    submitSelect,
-  } = props;
-
- /*  const usersFiltered = restFetchAllUsers.list_of_users;  */// MOCK DATA BORRAR LUEGO
-
+  const { setShowMenu, usertoId, setUsertoId, usersFiltered, submitSelect } =
+    props;
   const [userSelected, setUserSelected] = useState("nothing selected");
 
   function handleSubmit(event) {
