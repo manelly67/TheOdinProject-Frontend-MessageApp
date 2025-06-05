@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import styles from "../styles/Chat.module.css";
 import MainUser from "./MainUser";
-import MessagesInChat from "./MessagesInChat";
+import MsgsModelChat from "./MsgsModelChat";
 import ListActiveChats from "./ListActiveChats";
 
 const GuestChatView = (props) => {
@@ -35,6 +35,8 @@ const GuestChatView = (props) => {
   const [userTo, setUserTo] = useState(null);
   const [messages, setMessages] = useState([]);
   const [usersInChats, setUsersInChats] = useState([]);
+
+  console.log(selectedChat);
 
   const getObjUsers = useCallback(
     (chats) => {
@@ -163,11 +165,10 @@ const GuestChatView = (props) => {
           }}
           className={displayMessages}
         >
-          <MessagesInChat
+          <MsgsModelChat
             messages={messages}
-            userId={userId}
-            getAllChats={getAllChats}
-            getListOfUsers={getListOfUsers}
+            userTo={userTo}
+            usersInChats={usersInChats}
           />
         </div>
         <div

@@ -282,3 +282,9 @@
   position: absolute;
   bottom: -10%;
 }
+
+.userImg {
+  position: absolute;
+  top: 1%;
+  right: 2%;
+}

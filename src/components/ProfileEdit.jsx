@@ -108,6 +108,7 @@ const ProfileEdit = (props) => {
 
   useEffect(() => {
     if (userId !== null && userDetails !== null) {
+      console.log(userDetails);
       console.log(userDetails.role);
       switch (userDetails.role === "USER") {
         case true:
