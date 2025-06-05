@@ -90,6 +90,7 @@ const MainUser = (props) => {
           profileToEdit={profile}
           setShowProfile={setShowProfile}
           userId={userId}
+          userDetails={userDetails}
           token={token}
           getAllChats={getAllChats}
           getListOfUsers={getListOfUsers}

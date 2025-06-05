@@ -18,7 +18,7 @@ const urlAddresses = {
   isguest: `${base}/isguest`,
   chat_model: `${base}/isguest/chat_model`,
   available_users: `${base}/isguest/available_users`,
-  allowed_profiles: `${base}/isguest/profile`, // need params /:user_id
+  guest_profile: `${base}/isguest/profile`, // need params /:user_id
 };
 
 export { urlAddresses };

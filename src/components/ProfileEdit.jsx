@@ -6,9 +6,18 @@ import { ErrorMessage } from "./Error_message";
 import { userDetailsMock, mock_options_profile } from "../assets/mock_data";
 
 const ProfileEdit = (props) => {
-  const url = `${urlAddresses.profiles}`;
+  const url = `${urlAddresses.profiles}`; // for POST and PUT method same for roles USER or GUEST
+  const url_guest = `${urlAddresses.guest_profile}`;
+
   const { element, looks, close, profile, options } = styles;
-  const { setShowProfile, userId, token, getAllChats, getListOfUsers } = props;
+  const {
+    setShowProfile,
+    userId,
+    userDetails,
+    token,
+    getAllChats,
+    getListOfUsers,
+  } = props;
   const [profileToEdit, setProfileToEdit] = useState(null);
   const [optionsForEdit, setOptionsForEdit] = useState(null);
   /* 
@@ -50,59 +59,71 @@ const ProfileEdit = (props) => {
   console.log(avatar, nametoshow, aboutme);
 
   // get initial options with useEffect
-  const getOptions = useCallback(async () => {
-    console.log("get options");
-    try {
-      const response = await fetch(`${url}/${userId}`, {
-        method: "GET",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
-      const temp = await response.json();
-      console.log(temp);
-      if (temp.profile_options) {
-        setOptionsForEdit(temp.profile_options);
-      }
-      if (temp.user_profile) {
-        setProfileToEdit(temp.user_profile);
-        if (temp.user_profile.avatar) {
-          setAvatar(temp.user_profile.avatar.src_image);
-          setAvatarId(temp.user_profile.avatar.id);
+  const getOptions = useCallback(
+    async (url) => {
+      console.log("get options");
+      console.log(url);
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        });
+        const temp = await response.json();
+        console.log(temp);
+        if (temp.profile_options) {
+          setOptionsForEdit(temp.profile_options);
         }
-        if (temp.user_profile.nametoshow) {
-          setNametoshow(temp.user_profile.nametoshow);
+        if (temp.user_profile) {
+          setProfileToEdit(temp.user_profile);
+          if (temp.user_profile.avatar) {
+            setAvatar(temp.user_profile.avatar.src_image);
+            setAvatarId(temp.user_profile.avatar.id);
+          }
+          if (temp.user_profile.nametoshow) {
+            setNametoshow(temp.user_profile.nametoshow);
+          }
+          if (temp.user_profile.aboutme) {
+            setAboutme(temp.user_profile.aboutme);
+          }
         }
-        if (temp.user_profile.aboutme) {
-          setAboutme(temp.user_profile.aboutme);
+        if (!temp.user_profile) {
+          setAvatarId("no_avatar");
+          setBgcolorId("color_2");
+          setTextcolorId("color_1");
         }
+        if (temp.err) {
+          alert(temp.err.message);
+        }
+      } catch (error) {
+        alert("Something was wrong. try again later");
+        console.log(error);
       }
-      if(!temp.user_profile){
-        setAvatarId("no_avatar");
-        setBgcolorId("color_2");
-        setTextcolorId("color_1");
-      }
-      if (temp.err) {
-        alert(temp.err.message);
-      }
-    } catch (error) {
-      alert("Something was wrong. try again later");
-      console.log(error);
-    }
-  }, [token, url, userId]);
+    },
+    [token, userId]
+  );
 
   useEffect(() => {
-    if (userId !== null) {
-      getOptions();
+    if (userId !== null && userDetails !== null) {
+      console.log(userDetails.role);
+      switch (userDetails.role === "USER") {
+        case true:
+          getOptions(`${url}/${userId}`);
+          break;
+        default:
+          getOptions(`${url_guest}/${userId}`);
+          break;
+      }
     }
-  }, [getOptions, userId]);
+  }, [getOptions, userId, userDetails, url, url_guest]);
 
   // handle submit for create or update profile
   function handleSubmit(event) {
     event.preventDefault();
-   
+
     console.log(userId);
     console.log(aboutme);
     console.log(nametoshow);
