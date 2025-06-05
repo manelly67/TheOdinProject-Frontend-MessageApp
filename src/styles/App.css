@@ -138,7 +138,7 @@ body {
   height: 105px;
   font-size: 3rem;
   background-color: burlywood;
-  background: url("/src/assets/img/paloma_small.jpg");
+  background-image: url("/src/assets/img/paloma-small.webp");
   background-size: 99% 99%;
   align-content: center;
   align-items: center;
