@@ -23,6 +23,32 @@ const userDetailsMock = {
   },
 };
 
+const guestUserMock = {
+  id: "056e7f27-dd20-446d-9123-fdf8d7656c27",
+  email: "guest_1372@guest.com",
+  username: "guest_1372",
+  role: "GUEST",
+  status: "ONLINE",
+  chats: ["4289e4f3-8ca2-4323-a2fa-c2ebd0f71f23"],
+  profile: null,
+ /*  profile: {
+    nametoshow: "MN",
+    avatar: {
+      src_image:
+        "https://res.cloudinary.com/dwlqplcgt/image/upload/v1746485568/cream_boy_rvzo8h.jpg",
+    },
+    bgcolor: {
+      colorcode: "#ffffff",
+    },
+    textcolor: {
+      colorcode: "#2c3e4e",
+    },
+    aboutme:
+      "Donec bibendum ornare dignissim. Donec bibendum ornare dignissim. Fusce scelerisque in quam. Fusce scelerisque in quam. Donec bibendum ornare dignissim. Fusce scelerisque in quam",
+  }, */
+};
+
+
 const allChats = [
   {
     id: "4289e4f3-8ca2-4323-a2fa-c2ebd0f71f23",
@@ -392,6 +418,7 @@ const mock_options_profile = {
 export {
   usersInChatMock,
   userDetailsMock,
+  guestUserMock,
   allChats,
   messageCreated,
   resFetchAllChatsActiveUser,
