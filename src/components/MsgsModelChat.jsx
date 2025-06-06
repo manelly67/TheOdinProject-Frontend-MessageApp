@@ -1,3 +1,4 @@
+import no_avatar from "../assets/img/no_avatar.jpg";
 import styles from "../styles/Chat.module.css";
 
 const MsgsModelChat = (props) => {
@@ -8,15 +9,26 @@ const MsgsModelChat = (props) => {
     return x.userId === userTo;
   });
 
+  
   return (
     <>
-      <img
-        className={userImg}
-        src={filtered.userProfile.avatar.src_image}
-        alt="avatar"
-        width="30px"
-        height="30px"
-      ></img>
+      {!userTo ? null : !filtered.userProfile ? (
+        <img
+          className={userImg}
+          src={no_avatar}
+          alt="there is no avatar"
+          width="30px"
+          height="30px"
+        ></img>
+      ) : (
+        <img
+          className={userImg}
+          src={filtered.userProfile.avatar.src_image}
+          alt="avatar"
+          width="30px"
+          height="30px"
+        ></img>
+      )}
 
       {messages.length === 0 ? null : (
         <>
