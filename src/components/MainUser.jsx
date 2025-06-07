@@ -7,10 +7,9 @@ const MainUser = (props) => {
   const bgcolor = "white";
   const txtcolor = "black";
   const { userDetails, userId, token, getAllChats, getListOfUsers } = props;
-  const { profile } = userDetails;
+  const profile = !userDetails ? null : userDetails.profile;
   const { buttonEditProfile } = styles;
   const [showProfile, setShowProfile] = useState(false);
-
 
   return (
     <>
