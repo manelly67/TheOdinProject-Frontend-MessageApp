@@ -46,3 +46,7 @@ The app can be accessed in guest mode and in this way it will be possible:
 Backend: https://github.com/manelly67/TheOdinProject-Backend-MessagesApp <br>
 Frontend: https://github.com/manelly67/TheOdinProject-Frontend-MessageApp
 
+#### Credits: ####
+- The dove shown in the homepage and favicon was generated using ChatGPT.
+- The ThemeLightDark and Refresh Icons was imported from @mdi/react library.
+- The no_avatar image was created by myself using Pinta.
