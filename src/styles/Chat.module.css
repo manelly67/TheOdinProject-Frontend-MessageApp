@@ -15,7 +15,7 @@
   grid-template-rows: min-content 1fr;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 431px) {
   .chatbox {
     width: 92%;
     height: 83%;
@@ -175,7 +175,7 @@
   background-color: var(--color-border-box);
 }
 
-@media (max-width: 430px) {
+@media (max-width: 431px) {
   .chatsList > ul > li > div > p {
     font-size: 12px;
   }
