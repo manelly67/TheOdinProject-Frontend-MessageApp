@@ -120,11 +120,20 @@ const MainView = () => {
             {!wakeUp ? (
               <>
                 <div style={{ gridColumn: "1/5", gridRow: "1/2" }}>
-                  <p>loading...</p>
+                  <p className="waitingMsg">
+                    Please note that this project is intended for demonstration
+                    purposes only. The host server may take a moment to
+                    initialize after being powered on.
+                  </p>
                   <hr></hr>
-                  <p style={{ width: "70%", margin: "0 auto" }}>
-                    Dear user, this is a study project, please wait 1 minute for
-                    the server to wake up.
+                  <p className="waitingMsg">
+                    Kindly wait until the server is fully awake and responsive
+                    before proceeding with any actions.
+                  </p>
+                  <hr></hr>
+                  <p className="waitingMsg">
+                    The project manages authorization: sign up and login. And
+                    then the sending of private messages between two users.
                   </p>
                 </div>
               </>
